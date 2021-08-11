@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:wild_new/constant.dart';
+import 'package:wild_new/drinks_load_Screen.dart';
 import 'package:wild_new/wildLoadScreen.dart';
-
 import 'bottomAppBar.dart';
+import 'image_string.dart';
 import 'logoHeaderScreen.dart';
+import 'text_string.dart';
 
 class DrinksDinner extends StatefulWidget {
   @override
@@ -26,12 +27,22 @@ class DrinksDinnerState extends State<DrinksDinner> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Drinks",
-                  style: Theme.of(context).textTheme.headline3!.copyWith(
-                        fontSize: 38,
-                        fontWeight: FontWeight.w200,
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DrinksLoadScreen(),
                       ),
+                    );
+                  },
+                  child: Text(
+                    strDrinks,
+                    style: Theme.of(context).textTheme.headline3!.copyWith(
+                          fontSize: 38,
+                          fontWeight: FontWeight.w200,
+                        ),
+                  ),
                 ),
                 Divider(
                   color: kColor,
@@ -39,12 +50,15 @@ class DrinksDinnerState extends State<DrinksDinner> {
                   height: 50,
                   indent: 3,
                 ),
-                Text(
-                  "Dinner",
-                  style: Theme.of(context).textTheme.headline3!.copyWith(
-                        fontSize: 38,
-                        fontWeight: FontWeight.w200,
-                      ),
+                InkWell(
+                  onTap: () {},
+                  child: Text(
+                    strDinner,
+                    style: Theme.of(context).textTheme.headline3!.copyWith(
+                          fontSize: 38,
+                          fontWeight: FontWeight.w200,
+                        ),
+                  ),
                 ),
                 Divider(
                   color: kColor,
@@ -52,12 +66,15 @@ class DrinksDinnerState extends State<DrinksDinner> {
                   height: 50,
                   indent: 3,
                 ),
-                Text(
-                  "Surprise Me",
-                  style: Theme.of(context).textTheme.headline3!.copyWith(
-                        fontSize: 38,
-                        fontWeight: FontWeight.w200,
-                      ),
+                InkWell(
+                  onTap: () {},
+                  child: Text(
+                    strSurprise,
+                    style: Theme.of(context).textTheme.headline3!.copyWith(
+                          fontSize: 38,
+                          fontWeight: FontWeight.w200,
+                        ),
+                  ),
                 ),
                 Divider(
                   color: kColor,
@@ -73,11 +90,11 @@ class DrinksDinnerState extends State<DrinksDinner> {
                 left: kPadding * 4, bottom: kPadding * 4, top: kPadding * 6),
             child: Row(
               children: [
-                SvgPicture.asset("assets/image/single_user.svg"),
+                SvgPicture.asset(strSingleUser),
                 SizedBox(
                   width: kPadding * 1.5,
                 ),
-                SvgPicture.asset("assets/image/drop_down.svg"),
+                SvgPicture.asset(strDownArrow),
               ],
             ),
           ),

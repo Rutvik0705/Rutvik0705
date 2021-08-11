@@ -1,11 +1,12 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:wild_new/bottomAppBar.dart';
 import 'package:wild_new/constant.dart';
 import 'package:wild_new/drinks_dinner_screen.dart';
 import 'package:wild_new/logoHeaderScreen.dart';
+import 'image_string.dart';
+import 'text_string.dart';
 
 class LoadScreen extends StatefulWidget {
   @override
@@ -44,7 +45,7 @@ class LoadScreenState extends State<LoadScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: kPadding * 3),
               child: Text(
-                "You made it through Tuesday, \nScott!",
+                strYouMadeItScott,
                 style: Theme.of(context).textTheme.bodyText2,
               ),
             ),
@@ -73,7 +74,7 @@ class Dropdown_shear_calendar_widget extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(kPadding * 3),
-          child: SvgPicture.asset("assets/image/location_2.svg"),
+          child: SvgPicture.asset(strLocationSmallIcon),
         ),
         DropdownButton(
           dropdownColor: Colors.white,
@@ -94,11 +95,11 @@ class Dropdown_shear_calendar_widget extends StatelessWidget {
         SizedBox(
           width: kPadding * 4,
         ),
-        SvgPicture.asset("assets/image/share_icon.svg"),
+        SvgPicture.asset(strShareIcon),
         SizedBox(
           width: kPadding * 4,
         ),
-        SvgPicture.asset("assets/image/calendar.svg"),
+        SvgPicture.asset(strCalendar),
       ],
     );
   }

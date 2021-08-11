@@ -5,6 +5,9 @@ import 'package:wild_new/Widgets/send_code.dart';
 import 'package:wild_new/bottomAppBar.dart';
 import 'package:wild_new/constant.dart';
 import 'package:wild_new/logoHeaderScreen.dart';
+import 'package:wild_new/text_string.dart';
+
+import 'image_string.dart';
 
 class WildLoginWidget extends StatelessWidget {
   const WildLoginWidget({
@@ -80,7 +83,7 @@ class WildLoginWidget extends StatelessWidget {
                 Column(
                   children: [
                     SvgPicture.asset(
-                      'assets/image/sign_up.svg',
+                      strSignup,
                       color: kColor,
                     )
                   ],

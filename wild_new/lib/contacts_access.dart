@@ -5,6 +5,8 @@ import 'package:location/location.dart';
 import 'package:wild_new/constant.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:wild_new/logoHeaderScreen.dart';
+import 'package:wild_new/text_string.dart';
+import 'image_string.dart';
 import 'wildLoadScreen.dart';
 
 class PermissionRequestScreen extends StatefulWidget {
@@ -16,6 +18,7 @@ class PermissionRequestState extends State<PermissionRequestScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kbackgroundcolor,
       body: SafeArea(
         child: Column(
           children: [
@@ -24,7 +27,9 @@ class PermissionRequestState extends State<PermissionRequestScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: kPadding * 3),
               child: Row(
-                children: [SvgPicture.asset("assets/image/contact.svg")],
+                children: [
+                  SvgPicture.asset(strUserContact),
+                ],
               ),
             ),
             Padding(
@@ -35,7 +40,7 @@ class PermissionRequestState extends State<PermissionRequestScreen> {
               child: Row(
                 children: [
                   Text(
-                    "We would like to \naccess your contacts",
+                    strAccessYourContact,
                     style: Theme.of(context).textTheme.subtitle2,
                   ),
                 ],
@@ -49,7 +54,7 @@ class PermissionRequestState extends State<PermissionRequestScreen> {
               child: Row(
                 children: [
                   Text(
-                    "We use your contacts to add\nfriends to the app for\nmeeting up & connecting.",
+                    strFrdMettingNdConnection,
                     style: Theme.of(context).textTheme.bodyText1,
                   )
                 ],
@@ -57,7 +62,9 @@ class PermissionRequestState extends State<PermissionRequestScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(
-                  horizontal: kPadding * 3, vertical: kPadding * 2),
+                horizontal: kPadding * 3,
+                vertical: kPadding * 2,
+              ),
               child: Row(
                 children: [
                   InkWell(
@@ -70,7 +77,7 @@ class PermissionRequestState extends State<PermissionRequestScreen> {
                       );
                     },
                     child: SvgPicture.asset(
-                      "assets/image/close_round.svg",
+                      strCloseRound,
                     ),
                   ),
                   Padding(
@@ -80,16 +87,9 @@ class PermissionRequestState extends State<PermissionRequestScreen> {
                     child: InkWell(
                       onTap: () {
                         checkContactPermission(context);
-
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => LoadScreen(),
-                        //   ),
-                        // );
                       },
                       child: SvgPicture.asset(
-                        "assets/image/true_round.svg",
+                        strTrueRound,
                       ),
                     ),
                   ),

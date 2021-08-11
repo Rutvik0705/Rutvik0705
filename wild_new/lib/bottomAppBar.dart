@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'constant.dart';
+import 'text_string.dart';
 
 class WildBottomAppBar extends StatelessWidget {
   @override
@@ -9,7 +10,7 @@ class WildBottomAppBar extends StatelessWidget {
       width: double.infinity,
       child: Center(
         child: Text(
-          'AI RECOMMENDATIONS  |  TRAINEDBY YOU',
+          strAiRecommendations,
           style: Theme.of(context).textTheme.headline4,
         ),
       ),

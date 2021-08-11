@@ -1,0 +1,44 @@
+const String strWhatILikeDoing = 'What I \nLike Doing';
+const String strLetsGetStarted = "LET'S GET STARTED";
+const String strSendCode = 'SEND CODE';
+const String srtVerificationCode =
+    'We will sendyou a verification code to your phone number.';
+const String srtSubmit = 'SUBMIT';
+const String srtVerificationNumber = 'VERIFICATION CODE';
+const String strConfirrmation = "Confirmation";
+const String strEnterTheCode = "Please enter he code ent to";
+const String strResendCode = 'RESEND CODE';
+const String strVerify = 'VERIFY';
+const String srtPapudu = "🎉";
+const String strLetsGetWild = "Woohoo! \nLet's get \nWILD!";
+const String strOnlyUsingApp = "Only while using the App";
+const String strAlwaysAiLearning = "Always Allow for AI Learning";
+const String strDontAllow = "Don’t Allow";
+const String strWeNeedSomeHelp = "We need some help \nhear";
+const String strCanWeAccessLocation = "Can we access your\nlocation?";
+const String strCanWeSendNotification = "Can we send you\nnotifications?";
+const String strAccessYourContact = "We would like to \naccess your contacts";
+const String strFrdMettingNdConnection =
+    "We use your contacts to add\nfriends to the app for\nmeeting up & connecting.";
+const String strYouMadeItScott = "You made it through Tuesday, \nScott!";
+const String strDrinks = "Drinks";
+const String strDinner = "Dinner";
+const String strSurprise = "Surprise Me";
+const String strWhatILikeToDo = "WHAT I LIKE TO DO";
+const String strHelloScott = "Hello Scott,";
+const String strsignOut = "Sign out";
+const String strAiInstan = "AI Instan";
+const String strProfile = "Profile";
+const String strFavourite = "Favorites";
+const String strConnection = "Connections";
+const String strSupport = "Support";
+const String strMyProfole = "MY PROFILE";
+const String strScott = "Scott";
+const String strSave = "Save";
+const String strAiRecommendations = 'AI RECOMMENDATIONS  |  TRAINEDBY YOU';
+const String strAiHappeningNow = "So much AI happening\nright now\n...";
+const String strCheers = "Cheers!";
+const String strIfoundNear = "I found 5\nnearby you.";
+const String strSomeMayBeClosed =
+    "Note: Some may be closed\ndue to COVID-19 restrictions.\nAI checked by Yelp & Google.";
+const String strDurkinsBar = "Durkins Liquor Bar";

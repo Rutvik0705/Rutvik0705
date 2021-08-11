@@ -5,6 +5,9 @@ import 'package:wild_new/confirmation.dart';
 import 'package:wild_new/constant.dart';
 import 'package:wild_new/logoHeaderScreen.dart';
 
+import '../image_string.dart';
+import '../text_string.dart';
+
 class Verification extends StatefulWidget {
   @override
   VerificationState createState() => VerificationState();
@@ -24,7 +27,7 @@ class VerificationState extends State<Verification> {
                 padding: EdgeInsets.symmetric(vertical: kDefaultPadding),
               ),
               BackbuttonWithTitleWidget(
-                navigationTitle: 'VERIFICATION CODE',
+                navigationTitle: srtVerificationNumber,
                 onClickBack: () {
                   Navigator.pop(context);
                 },
@@ -38,7 +41,7 @@ class VerificationState extends State<Verification> {
                 child: Row(
                   children: [
                     Text(
-                      "Confirmation",
+                      strConfirrmation,
                       style: Theme.of(context).textTheme.headline3,
                     )
                   ],
@@ -50,7 +53,7 @@ class VerificationState extends State<Verification> {
               Column(
                 children: [
                   Text(
-                    "Please enter he code ent to",
+                    strEnterTheCode,
                     style: Theme.of(context).textTheme.headline6,
                   )
                 ],
@@ -136,7 +139,7 @@ class VerificationState extends State<Verification> {
               Column(
                 children: [
                   Text(
-                    'RESEND CODE',
+                    strResendCode,
                     style: Theme.of(context).textTheme.headline6,
                   )
                 ],
@@ -146,7 +149,6 @@ class VerificationState extends State<Verification> {
               ),
               InkWell(
                 onTap: () {
-                  //print("ritvik");
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -166,7 +168,7 @@ class VerificationState extends State<Verification> {
                   ),
                   child: Center(
                     child: Text(
-                      'VERIFY',
+                      strVerify,
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                   ),
@@ -268,7 +270,7 @@ class VerificationState extends State<Verification> {
                               height: 50,
                               child: Center(
                                 child: SvgPicture.asset(
-                                  "assets/image/delete.svg",
+                                  strDeleteIcon,
                                 ),
                               ),
                             ),

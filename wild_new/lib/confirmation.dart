@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:wild_new/constant.dart';
 import 'package:wild_new/location.dart';
 import 'package:wild_new/logoHeaderScreen.dart';
+import 'package:wild_new/text_string.dart';
 
 class Confirmation extends StatefulWidget {
   @override
@@ -44,7 +45,7 @@ class ConfirmationState extends State<Confirmation> {
               child: Row(
                 children: [
                   Text(
-                    "🎉",
+                    srtPapudu,
                     style: TextStyle(fontSize: 77),
                   ),
                 ],
@@ -56,7 +57,7 @@ class ConfirmationState extends State<Confirmation> {
               child: Row(
                 children: [
                   Text(
-                    "Woohoo! \nLet's get \nWILD!",
+                    strLetsGetWild,
                     style: Theme.of(context).textTheme.bodyText2,
                     maxLines: 3,
                   ),

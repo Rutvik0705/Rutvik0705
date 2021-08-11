@@ -3,28 +3,24 @@ import 'package:flutter_svg/svg.dart';
 import 'package:location/location.dart';
 import 'package:wild_new/constant.dart';
 import 'package:wild_new/logoHeaderScreen.dart';
-import 'package:wild_new/permission_request.dart';
-// ignore: unused_import
-import 'package:wild_new/location.dart';
+import 'package:wild_new/contacts_access.dart';
+import 'package:wild_new/text_string.dart';
+import 'image_string.dart';
 
 class LocationScreen extends StatefulWidget {
   @override
   LocationState createState() => LocationState();
 }
 
-var help = [
-  "Only while using the App",
-  "Always Allow for AI Learning",
-  "Don’t Allow",
+var arrLocationPermission = [
+  strOnlyUsingApp,
+  strAlwaysAiLearning,
+  strDontAllow,
 ];
 
 class LocationState extends State<LocationScreen> {
   late int selectedIndex = 3;
-  // Location _locationService = new Location();
-  // late LocationData initialLocation;
-  // late LocationData _currentLocation;
 
-  // bool _permissionGranted = false;
   late String error;
 
   @override
@@ -40,7 +36,7 @@ class LocationState extends State<LocationScreen> {
               child: Row(
                 children: [
                   Text(
-                    "We need some help \nhear",
+                    strWeNeedSomeHelp,
                     style: Theme.of(context).textTheme.subtitle2,
                   ),
                 ],
@@ -53,17 +49,17 @@ class LocationState extends State<LocationScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: kPadding * 3),
-                  child: SvgPicture.asset("assets/image/location.svg"),
+                  child: SvgPicture.asset(strLocationImage),
                 ),
                 Text(
-                  "Can we access your\nlocation?",
+                  strCanWeAccessLocation,
                   style: Theme.of(context).textTheme.overline,
                 ),
                 SizedBox(
                   width: 20,
                 ),
                 SvgPicture.asset(
-                  "assets/image/question_mark.svg",
+                  strQuestionMark,
                 ),
               ],
             ),
@@ -74,7 +70,7 @@ class LocationState extends State<LocationScreen> {
               height: 200,
               child: ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: help.length,
+                itemCount: arrLocationPermission.length,
                 itemBuilder: (context, index) {
                   return Container(
                     child: Column(
@@ -87,7 +83,7 @@ class LocationState extends State<LocationScreen> {
                                 child: Container(
                                   child: selectedIndex == index
                                       ? SvgPicture.asset(
-                                          'assets/image/true.svg',
+                                          strTrueIcon,
                                           width: kPadding * 2,
                                         )
                                       : Container(
@@ -106,7 +102,7 @@ class LocationState extends State<LocationScreen> {
                                       horizontal: kPadding * 1.5,
                                     ),
                                     child: Text(
-                                      help[index],
+                                      arrLocationPermission[index],
                                       style: index == 2
                                           ? Theme.of(context)
                                               .textTheme
@@ -146,17 +142,17 @@ class LocationState extends State<LocationScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: kPadding * 3),
-                  child: SvgPicture.asset("assets/image/bell.svg"),
+                  child: SvgPicture.asset(strBellIcon),
                 ),
                 Text(
-                  "Can we send you\nnotifications?",
+                  strCanWeSendNotification,
                   style: Theme.of(context).textTheme.overline,
                 ),
                 SizedBox(
                   width: 30,
                 ),
                 SvgPicture.asset(
-                  "assets/image/question_mark.svg",
+                  strQuestionMark,
                 ),
               ],
             ),
@@ -178,7 +174,7 @@ class LocationState extends State<LocationScreen> {
                     );
                   },
                   child: SvgPicture.asset(
-                    "assets/image/close_round.svg",
+                    strCloseRound,
                   ),
                 ),
                 SizedBox(
@@ -194,12 +190,6 @@ class LocationState extends State<LocationScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    //print("ritvik");
-                    // LocationPermissions().openAppSettings().then(
-                    //       (bool hasOpened) => debugPrint(
-                    //         'App Settings opened: ' + hasOpened.toString(),
-                    //       ),
-                    //     );
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -208,7 +198,7 @@ class LocationState extends State<LocationScreen> {
                     );
                   },
                   child: SvgPicture.asset(
-                    "assets/image/true_round.svg",
+                    strTrueRound,
                   ),
                 ),
               ],

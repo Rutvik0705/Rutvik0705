@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wild_new/constant.dart';
 import 'package:wild_new/drarwe.dart';
 
+import 'image_string.dart';
+
 class LogoHeaderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class LogoHeaderScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SvgPicture.asset('assets/image/wild_logo.svg'),
+            SvgPicture.asset(strWildLogoIcon),
           ],
         ),
       ),
@@ -27,13 +29,11 @@ class LogoHeaderWithMenu extends StatelessWidget {
       color: kbackgroundcolor,
       child: SafeArea(
         child: Row(
-          //crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Icon(Icons.menu, color: Colors.transparent),
             Spacer(
               flex: 3,
             ),
-            SvgPicture.asset('assets/image/wild_logo.svg'),
+            SvgPicture.asset(strWildLogoIcon),
             Spacer(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: kPadding * 3),
@@ -46,7 +46,7 @@ class LogoHeaderWithMenu extends StatelessWidget {
                     ),
                   );
                 },
-                child: SvgPicture.asset("assets/image/menue.svg"),
+                child: SvgPicture.asset(strMenue),
               ),
             ),
           ],
@@ -55,3 +55,37 @@ class LogoHeaderWithMenu extends StatelessWidget {
     );
   }
 }
+
+class WildLogoMenueIconWhite extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Spacer(
+          flex: 2,
+        ),
+        SvgPicture.asset(strOnlyWildIconWhite),
+        SizedBox(width: kPadding*12.4,),
+        Padding(
+          padding: const EdgeInsets.only(right: kPadding ),
+          child: InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DrawerScreen(),
+                ),
+              );
+            },
+            child: SvgPicture.asset(strMenue),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// @override
+// State<StatefulWidget> createState() {
+//   // TODO: implement createState
+//   throw UnimplementedError();
+// }

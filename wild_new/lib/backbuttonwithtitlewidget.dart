@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'image_string.dart';
 
 
 class BackbuttonWithTitleWidget extends StatelessWidget {
@@ -22,13 +23,11 @@ class BackbuttonWithTitleWidget extends StatelessWidget {
             onClickBack();
           },
           child: Container(
-            //color: Colors.white,
             height: 50,
             width: 50,
-            //color: Colors.white,
             child: Center(
               child: SvgPicture.asset(
-                'assets/image/back_arrow.svg',
+                strBackArrow,
               ),
             ),
           ),

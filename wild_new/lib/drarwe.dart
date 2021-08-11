@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:wild_new/constant.dart';
 import 'package:wild_new/user_profile.dart';
+import 'image_string.dart';
+import 'text_string.dart';
 
 class DrawerScreen extends StatefulWidget {
   @override
@@ -25,7 +27,7 @@ class DrawerScreenState extends State<DrawerScreen> {
             Padding(
               padding: const EdgeInsets.only(top: kPadding * 3.6),
               child: Text(
-                "WHAT I LIKE TO DO",
+                strWhatILikeToDo,
                 style: Theme.of(context)
                     .textTheme
                     .headline5!
@@ -38,7 +40,7 @@ class DrawerScreenState extends State<DrawerScreen> {
                     padding: EdgeInsets.only(
                         left: kPadding * 3, top: kPadding * 14)),
                 Text(
-                  "Hello Scott,",
+                  strHelloScott,
                   style: Theme.of(context)
                       .textTheme
                       .headline3!
@@ -66,7 +68,6 @@ class DrawerScreenState extends State<DrawerScreen> {
                                     _allMenu[index].formenu;
                                 switch (index) {
                                   case 0:
-                                    print("new");
                                     break;
                                   case 1:
                                     Navigator.push(
@@ -139,7 +140,7 @@ class DrawerScreenState extends State<DrawerScreen> {
               child: Row(
                 children: [
                   Text(
-                    "Sign out",
+                    strsignOut,
                     style: Theme.of(context)
                         .textTheme
                         .bodyText1!
@@ -156,10 +157,6 @@ class DrawerScreenState extends State<DrawerScreen> {
 }
 
 class WildLogoCloseIcon extends StatelessWidget {
-  // const WildLogoCloseIcon({
-  //   Key? key,
-  // }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -167,7 +164,7 @@ class WildLogoCloseIcon extends StatelessWidget {
         Spacer(
           flex: 2,
         ),
-        SvgPicture.asset("assets/image/wild_Icon.svg"),
+        SvgPicture.asset(strOnlyWildIcon),
         Spacer(),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: kPadding * 3),
@@ -175,7 +172,7 @@ class WildLogoCloseIcon extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
             },
-            child: SvgPicture.asset("assets/image/close_Icon.svg"),
+            child: SvgPicture.asset(strCloseIcon),
           ),
         ),
       ],
@@ -194,24 +191,24 @@ class Menu {
   static List<Menu> allMenu() {
     var listOfAllMenu = <Menu>[];
     listOfAllMenu.add(new Menu(
-        image: "assets/image/new.png",
-        name: "AI Instan",
+        image: strNewAiInstan,
+        name: strAiInstan,
         formenu: forMenu.ai_instat));
     listOfAllMenu.add(new Menu(
-        image: "assets/image/profile.png",
-        name: "Profile",
+        image: strProfileSmile,
+        name: strProfile,
         formenu: forMenu.profile));
     listOfAllMenu.add(new Menu(
-        image: "assets/image/daimond.png",
-        name: "Favorites",
+        image: strDaimond,
+        name: strFavourite,
         formenu: forMenu.favourite));
     listOfAllMenu.add(new Menu(
-        image: "assets/image/connection.png",
-        name: "Connections",
+        image: strConnections,
+        name: strConnection,
         formenu: forMenu.connection));
     listOfAllMenu.add(new Menu(
-        image: "assets/image/setting.png",
-        name: "Support",
+        image: strSetting,
+        name: strSupport,
         formenu: forMenu.support));
 
     return listOfAllMenu;

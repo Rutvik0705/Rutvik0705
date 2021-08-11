@@ -5,6 +5,8 @@ import 'package:wild_new/constant.dart';
 import 'package:flutter/src/widgets/navigator.dart' show Navigator;
 import 'package:wild_new/logoHeaderScreen.dart';
 import '../backbuttonwithtitlewidget.dart';
+import '../image_string.dart';
+import '../text_string.dart';
 import 'verification.dart';
 
 class SendCodeScreen extends StatefulWidget {
@@ -26,14 +28,14 @@ class SecondCodeScreenState extends State<SendCodeScreen> {
                 height: kDefaultPadding * 2,
               ),
               BackbuttonWithTitleWidget(
-                navigationTitle: 'SEND CODE',
+                navigationTitle: strSendCode,
                 onClickBack: () {
                   Navigator.pop(context);
                 },
               ),
               Spacer(),
               Text(
-                'We will sendyou a verification code to your phone number.',
+                srtVerificationCode,
                 style: Theme.of(context).textTheme.headline3,
                 maxLines: 3,
               ),
@@ -48,7 +50,6 @@ class SecondCodeScreenState extends State<SendCodeScreen> {
                 child: Center(
                   child: TextField(
                     decoration: InputDecoration(
-                        //hintText: "Enter mobile number",
                         border: InputBorder.none,
                         hintStyle: TextStyle(color: Colors.black)),
                   ),
@@ -57,7 +58,7 @@ class SecondCodeScreenState extends State<SendCodeScreen> {
               SizedBox(height: kDefaultPadding * 2),
               Row(
                 children: [
-                  Text('SUBMIT', style: Theme.of(context).textTheme.headline5),
+                  Text(srtSubmit, style: Theme.of(context).textTheme.headline5),
                   Padding(padding: EdgeInsets.only(left: 15)),
                   InkWell(
                     onTap: () {
@@ -68,7 +69,7 @@ class SecondCodeScreenState extends State<SendCodeScreen> {
                         ),
                       );
                     },
-                    child: SvgPicture.asset("assets/image/right_arrow.svg"),
+                    child: SvgPicture.asset(strRightArrow),
                   ),
                 ],
               ),
