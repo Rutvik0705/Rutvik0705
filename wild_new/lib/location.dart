@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:location/location.dart';
+import 'package:permission_handler/permission_handler.dart';
+// import 'package:location/location.dart';
 import 'package:wild_new/constant.dart';
 import 'package:wild_new/logoHeaderScreen.dart';
 import 'package:wild_new/contacts_access.dart';
@@ -210,30 +211,57 @@ class LocationState extends State<LocationScreen> {
   }
 
   checkLocationPermission() async {
-    Location _locationService = new Location();
-    bool serviceEnabled = await _locationService.serviceEnabled();
-    if (serviceEnabled) {
-      var stauts = await _locationService.requestPermission();
+    if (await Permission.location.request().isGranted) {}
+    Map<Permission, PermissionStatus> stauts = await [
+      Permission.location,
+    ].request();
 
-      if (stauts == PermissionStatus.granted) {
-        setState(
-          () {
-            selectedIndex = 1;
-          },
-        );
-      } else if (stauts == PermissionStatus.grantedLimited) {
-        setState(
-          () {
-            selectedIndex = 0;
-          },
-        );
-      } else {
-        setState(
-          () {
-            selectedIndex = 2;
-          },
-        );
-      }
+    Permission.location.request();
+    print("Status${stauts[Permission.location]}");
+
+    if (stauts[Permission.location] == PermissionStatus.granted) {
+      setState(
+        () {
+          selectedIndex = 1;
+        },
+      );
+    } else if (stauts[Permission.location] == PermissionStatus.limited) {
+      setState(
+        () {
+          selectedIndex = 0;
+        },
+      );
+    } else {
+      setState(
+        () {
+          selectedIndex = 2;
+        },
+      );
     }
+    // Location _locationService = new Location();
+    // bool serviceEnabled = await _locationService.serviceEnabled();
+    // if (serviceEnabled) {
+    //   var stauts = await _locationService.requestPermission();
+
+    //   if (stauts == PermissionStatus.granted) {
+    //     setState(
+    //       () {
+    //         selectedIndex = 1;
+    //       },
+    //     );
+    //   } else if (stauts == PermissionStatus.grantedLimited) {
+    //     setState(
+    //       () {
+    //         selectedIndex = 0;
+    //       },
+    //     );
+    //   } else {
+    //     setState(
+    //       () {
+    //         selectedIndex = 2;
+    //       },
+    //     );
+    //   }
+    // }
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:wild_new/cheersScreen.dart';
 import 'package:wild_new/constant.dart';
-import 'bottomAppBar.dart';
+import 'bottom_AppBar_Widget.dart';
 import 'image_string.dart';
 import 'text_string.dart';
 

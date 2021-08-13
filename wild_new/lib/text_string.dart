@@ -42,3 +42,12 @@ const String strIfoundNear = "I found 5\nnearby you.";
 const String strSomeMayBeClosed =
     "Note: Some may be closed\ndue to COVID-19 restrictions.\nAI checked by Yelp & Google.";
 const String strDurkinsBar = "Durkins Liquor Bar";
+const String strAddressBar = "415 W Main Ave,\nSpokane, WA 99201";
+const String strWebCom = "durkinsliquorbar.com";
+const String strOverview = "OVERVIEW";
+const String strA_NattyUpscaleDiner =
+    "A natty upscale diner with an intimate\nbasement bar…";
+const String strDurkinsLiquorBar = "durkins_liquor_bar";
+const String strDetailsInviteFriend = "DETAILS";
+const String strInviteFriend = "Invite Friends";
+const String strSmsInviteFriend = "SMS";

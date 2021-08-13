@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:location/location.dart';
+//import 'package:location/location.dart';
 import 'package:wild_new/constant.dart';
-import 'package:contacts_service/contacts_service.dart';
+//import 'package:contacts_service/contacts_service.dart';
 import 'package:wild_new/logoHeaderScreen.dart';
 import 'package:wild_new/text_string.dart';
 import 'image_string.dart';
 import 'wildLoadScreen.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class PermissionRequestScreen extends StatefulWidget {
   @override
@@ -104,18 +105,38 @@ class PermissionRequestState extends State<PermissionRequestScreen> {
   }
 
   checkContactPermission(BuildContext context) async {
-    // ignore: unused_local_variable
-    Iterable<Contact> contacts = await ContactsService.getContacts();
-    Type permission = PermissionStatus;
-    // ignore: unrelated_type_equality_checks
-    if (permission == PermissionStatus.granted) {
+    if (await Permission.contacts.request().isGranted) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoadScreen(),
+          ),
+        );
     } else {
       Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => LoadScreen(),
-        ),
-      );
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoadScreen(),
+          ),
+        );
     }
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.contacts,
+    ].request();
+    print("dfcwdfcwdfcwd${statuses[Permission.location]}");
+    
+    // ignore: unused_local_variable
+    // Iterable<Contact> contacts = await ContactsService.getContacts();
+    // Type permission = PermissionStatus;
+    // // ignore: unrelated_type_equality_checks
+    // if (permission == PermissionStatus.granted) {
+    // } else {
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => LoadScreen(),
+    //   ),
+    //   );
+    // }
   }
 }

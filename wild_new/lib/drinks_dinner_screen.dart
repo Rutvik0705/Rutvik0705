@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:wild_new/constant.dart';
 import 'package:wild_new/drinks_load_Screen.dart';
 import 'package:wild_new/wildLoadScreen.dart';
-import 'bottomAppBar.dart';
+import 'bottom_AppBar_Widget.dart';
 import 'image_string.dart';
 import 'logoHeaderScreen.dart';
 import 'text_string.dart';

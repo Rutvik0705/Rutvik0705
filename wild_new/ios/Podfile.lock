@@ -1,34 +1,28 @@
 PODS:
-  - contacts_service (0.2.2):
-    - Flutter
   - Flutter (1.0.0)
-  - location (0.0.1):
+  - "permission_handler (5.1.0+2)":
     - Flutter
   - sms (0.0.1):
     - Flutter
 
 DEPENDENCIES:
-  - contacts_service (from `.symlinks/plugins/contacts_service/ios`)
   - Flutter (from `Flutter`)
-  - location (from `.symlinks/plugins/location/ios`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
   - sms (from `.symlinks/plugins/sms/ios`)
 
 EXTERNAL SOURCES:
-  contacts_service:
-    :path: ".symlinks/plugins/contacts_service/ios"
   Flutter:
     :path: Flutter
-  location:
-    :path: ".symlinks/plugins/location/ios"
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
   sms:
     :path: ".symlinks/plugins/sms/ios"
 
 SPEC CHECKSUMS:
-  contacts_service: 849e1f84281804c8bfbec1b4c3eedcb23c5d3eca
-  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
-  location: 3a2eed4dd2fab25e7b7baf2a9efefe82b512d740
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
   sms: 1e6c3082da09f2a4961d61bc254cc86865993ffd
 
-PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+PODFILE CHECKSUM: 207e57c18c88b64f61b2e72b43a007b482e8660e
 
 COCOAPODS: 1.10.1

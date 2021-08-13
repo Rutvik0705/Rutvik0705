@@ -23,9 +23,7 @@ class VerificationState extends State<Verification> {
           child: Column(
             children: [
               LogoHeaderScreen(),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: kDefaultPadding),
-              ),
+              SizedBox(height: kPadding * 6),
               BackbuttonWithTitleWidget(
                 navigationTitle: srtVerificationNumber,
                 onClickBack: () {
@@ -75,14 +73,18 @@ class VerificationState extends State<Verification> {
                   children: [
                     Container(
                       height: 74,
-                      width: 69,
+                      width: 68,
                       decoration: BoxDecoration(
-                        color: kbottomAppBarcolor,
-                        borderRadius: BorderRadius.circular(55),
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(border: InputBorder.none),
-                        keyboardType: TextInputType.number,
+                          color: kbottomAppBarcolor,
+                          borderRadius: BorderRadius.circular(38)),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: kDefaultPadding),
+                      child: Center(
+                        child: TextField(
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintStyle: TextStyle(color: Colors.black)),
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -90,14 +92,18 @@ class VerificationState extends State<Verification> {
                     ),
                     Container(
                       height: 74,
-                      width: 69,
+                      width: 68,
                       decoration: BoxDecoration(
-                        color: kbottomAppBarcolor,
-                        borderRadius: BorderRadius.circular(55),
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(border: InputBorder.none),
-                        keyboardType: TextInputType.number,
+                          color: kbottomAppBarcolor,
+                          borderRadius: BorderRadius.circular(38)),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: kDefaultPadding),
+                      child: Center(
+                        child: TextField(
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintStyle: TextStyle(color: Colors.black)),
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -105,14 +111,18 @@ class VerificationState extends State<Verification> {
                     ),
                     Container(
                       height: 74,
-                      width: 69,
+                      width: 68,
                       decoration: BoxDecoration(
-                        color: kbottomAppBarcolor,
-                        borderRadius: BorderRadius.circular(55),
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(border: InputBorder.none),
-                        keyboardType: TextInputType.number,
+                          color: kbottomAppBarcolor,
+                          borderRadius: BorderRadius.circular(38)),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: kDefaultPadding),
+                      child: Center(
+                        child: TextField(
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintStyle: TextStyle(color: Colors.black)),
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -120,14 +130,18 @@ class VerificationState extends State<Verification> {
                     ),
                     Container(
                       height: 74,
-                      width: 69,
+                      width: 68,
                       decoration: BoxDecoration(
-                        color: kbottomAppBarcolor,
-                        borderRadius: BorderRadius.circular(55),
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(border: InputBorder.none),
-                        keyboardType: TextInputType.number,
+                          color: kbottomAppBarcolor,
+                          borderRadius: BorderRadius.circular(38)),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: kDefaultPadding),
+                      child: Center(
+                        child: TextField(
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintStyle: TextStyle(color: Colors.black)),
+                        ),
                       ),
                     ),
                   ],

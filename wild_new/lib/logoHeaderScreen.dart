@@ -64,9 +64,11 @@ class WildLogoMenueIconWhite extends StatelessWidget {
           flex: 2,
         ),
         SvgPicture.asset(strOnlyWildIconWhite),
-        SizedBox(width: kPadding*12.4,),
+        SizedBox(
+          width: kPadding * 11,
+        ),
         Padding(
-          padding: const EdgeInsets.only(right: kPadding ),
+          padding: const EdgeInsets.only(right: kPadding),
           child: InkWell(
             onTap: () {
               Navigator.push(
@@ -76,7 +78,10 @@ class WildLogoMenueIconWhite extends StatelessWidget {
                 ),
               );
             },
-            child: SvgPicture.asset(strMenue),
+            child: SvgPicture.asset(
+              strMenue,
+              color: kColor,
+            ),
           ),
         ),
       ],

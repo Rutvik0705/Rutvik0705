@@ -64,6 +64,7 @@ class DrawerScreenState extends State<DrawerScreen> {
                                 EdgeInsets.symmetric(vertical: kPadding * 1.5),
                             child: InkWell(
                               onTap: () {
+                                // ignore: unused_local_variable
                                 late forMenu selectedType =
                                     _allMenu[index].formenu;
                                 switch (index) {

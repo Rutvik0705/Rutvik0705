@@ -7,7 +7,7 @@ import 'package:wild_new/logoHeaderScreen.dart';
 import '../backbuttonwithtitlewidget.dart';
 import '../image_string.dart';
 import '../text_string.dart';
-import 'verification.dart';
+import 'verification_number_screen.dart';
 
 class SendCodeScreen extends StatefulWidget {
   @override
@@ -25,7 +25,7 @@ class SecondCodeScreenState extends State<SendCodeScreen> {
             children: [
               LogoHeaderScreen(),
               SizedBox(
-                height: kDefaultPadding * 2,
+                height: kPadding * 6,
               ),
               BackbuttonWithTitleWidget(
                 navigationTitle: strSendCode,
@@ -56,22 +56,23 @@ class SecondCodeScreenState extends State<SendCodeScreen> {
                 ),
               ),
               SizedBox(height: kDefaultPadding * 2),
-              Row(
-                children: [
-                  Text(srtSubmit, style: Theme.of(context).textTheme.headline5),
-                  Padding(padding: EdgeInsets.only(left: 15)),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Verification(),
-                        ),
-                      );
-                    },
-                    child: SvgPicture.asset(strRightArrow),
-                  ),
-                ],
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Verification(),
+                    ),
+                  );
+                },
+                child: Row(
+                  children: [
+                    Text(srtSubmit,
+                        style: Theme.of(context).textTheme.headline5),
+                    Padding(padding: EdgeInsets.only(left: 15)),
+                    SvgPicture.asset(strRightArrow),
+                  ],
+                ),
               ),
               Spacer(
                 flex: 2,

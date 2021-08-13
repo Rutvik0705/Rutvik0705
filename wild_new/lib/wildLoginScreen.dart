@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 // ignore: unused_import
-import 'package:wild_new/Widgets/send_code.dart';
-import 'package:wild_new/bottomAppBar.dart';
+import 'package:wild_new/Widgets/send_code_screen.dart';
+import 'package:wild_new/bottom_AppBar_Widget.dart';
 import 'package:wild_new/constant.dart';
 import 'package:wild_new/logoHeaderScreen.dart';
 import 'package:wild_new/text_string.dart';
