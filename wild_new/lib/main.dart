@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wild_new/constant.dart';
-import 'package:wild_new/wildLoginScreen.dart';
+import 'package:wild_new/utility/constant.dart';
+import 'package:wild_new/screens/wildLogin_Screen.dart';
 
 void main() {
   runApp(MyApp());
