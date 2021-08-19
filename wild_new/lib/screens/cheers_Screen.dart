@@ -116,11 +116,16 @@ class CheersScreenState extends State<CheersScreen> {
   }
 }
 
-class DrinkListWidget extends StatelessWidget {
+class DrinkListWidget extends StatefulWidget {
   const DrinkListWidget({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<DrinkListWidget> createState() => _DrinkListWidgetState();
+}
+
+class _DrinkListWidgetState extends State<DrinkListWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -135,28 +140,6 @@ class DrinkListWidget extends StatelessWidget {
                   .copyWith(fontSize: 24, fontWeight: FontWeight.w300),
             ),
             Spacer(),
-            // Container(
-            //   color: Colors.green[200],
-            //   height: 22,
-            //   width: 48,
-            //   // decoration: BoxDecoration(
-            //   //   boxShadow: [
-            //   //     BoxShadow(
-            //   //       color: Colors.green,
-            //   //       offset: Offset(2.0, 2.0),
-            //   //     ),
-            //   //   ],
-            //   // ),
-            //   child: Center(
-            //     child: Text(
-            //       "OPEN",
-            //       style: Theme.of(context)
-            //           .textTheme
-            //           .bodyText1!
-            //           .copyWith(fontSize: kPadding, color: Colors.green),
-            //     ),
-            //   ),
-            // ),
             InkWell(
               onTap: () {
                 Navigator.push(
@@ -166,10 +149,31 @@ class DrinkListWidget extends StatelessWidget {
                   ),
                 );
               },
-              child: SvgPicture.asset(
-                strOpenButton,
-                height: 30,
-                width: 12,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 2),
+                child: Container(
+                  height: 22,
+                  width: 48,
+                  decoration: BoxDecoration(
+                    color: Colors.green[200],
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(3, 3),
+                        color: Colors.green,
+                        // blurRadius:
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      "OPEN",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1!
+                          .copyWith(fontSize: kPadding, color: Colors.green),
+                    ),
+                  ),
+                ),
               ),
             ),
           ],
@@ -254,6 +258,9 @@ class DrinkListWidget extends StatelessWidget {
                           .headline4!
                           .copyWith(color: kColor, fontWeight: FontWeight.w500),
                     ),
+                    SizedBox(
+                      width: kPadding * 0.8,
+                    ),
                     SvgPicture.asset(strClocktime)
                   ],
                 ),
@@ -268,6 +275,9 @@ class DrinkListWidget extends StatelessWidget {
                           .textTheme
                           .headline4!
                           .copyWith(color: kColor, fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(
+                      width: kPadding * 0.8,
                     ),
                     SvgPicture.asset(strLocationSmallIcon),
                   ],

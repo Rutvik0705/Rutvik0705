@@ -52,17 +52,26 @@ class ListDetailScreenState extends State<ListDetailScreen> {
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(
-                          width: 2,
+                          width: 3,
                           color: kColor,
                         ),
-                        borderRadius: BorderRadius.circular(45),
+                        borderRadius: BorderRadius.circular(100),
                       ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(45),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                          width: 3,
+                          color: kbackgroundcolor,
                         ),
-                        child: Image.asset(
-                          strDrinksLogoImage,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(45),
+                          ),
+                          child: Image.asset(
+                            strDrinksLogoImage,
+                          ),
                         ),
                       ),
                     ),
@@ -141,13 +150,43 @@ class ListDetailScreenState extends State<ListDetailScreen> {
                       ),
                       Spacer(),
                       InkWell(
-                        onTap: () {},
-                        child: SvgPicture.asset(
-                          strOpenButton,
-                          height: 30,
-                          width: 12,
+                        onTap: () {
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => ListDetailScreen(),
+                          //   ),
+                          // );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 2),
+                          child: Container(
+                            height: 22,
+                            width: 48,
+                            decoration: BoxDecoration(
+                              color: Colors.green[200],
+                              boxShadow: [
+                                BoxShadow(
+                                  offset: Offset(3, 3),
+                                  color: Colors.green,
+                                  // blurRadius:
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: Text(
+                                "OPEN",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(
+                                        fontSize: kPadding,
+                                        color: Colors.green),
+                              ),
+                            ),
+                          ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                   Row(

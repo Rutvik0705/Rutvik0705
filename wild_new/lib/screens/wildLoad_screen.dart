@@ -8,7 +8,6 @@ import 'package:wild_new/utility/constant.dart';
 import 'package:wild_new/utility/image_string.dart';
 import 'package:wild_new/utility/text_string.dart';
 
-
 class LoadScreen extends StatefulWidget {
   @override
   LoadScreenState createState() => LoadScreenState();
@@ -63,45 +62,68 @@ class LoadScreenState extends State<LoadScreen> {
   }
 }
 
-// ignore: camel_case_types
-class Dropdown_shear_calendar_widget extends StatelessWidget {
-  const Dropdown_shear_calendar_widget({
+// ignore: camel_case_types, must_be_immutable
+class Dropdown_shear_calendar_widget extends StatefulWidget {
+  Dropdown_shear_calendar_widget({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<Dropdown_shear_calendar_widget> createState() =>
+      _Dropdown_shear_calendar_widgetState();
+}
+
+// ignore: camel_case_types
+class _Dropdown_shear_calendar_widgetState
+    extends State<Dropdown_shear_calendar_widget> {
+  var _cityName = [
+    'Spokane, WA',
+    'India',
+    'Canada',
+    'London',
+  ];
+
+  late String _currentItemSelected = 'Spokane, WA';
+
+  @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(kPadding * 3),
-          child: SvgPicture.asset(strLocationSmallIcon),
-        ),
-        DropdownButton(
-          dropdownColor: Colors.white,
-          iconSize: 40,
-          focusColor: Colors.black,
-          style: TextStyle(color: kbackgroundcolor, fontSize: 25),
-          underline: Container(color: Colors.transparent),
-          items: ['A', 'B', 'C', 'D'].map((String value) {
-            return DropdownMenuItem(
-              value: value,
-              child: new Text(value),
-            );
-          }).toList(),
-          onChanged: (_) {
-            print(DropdownMenuItem);
-          },
-        ),
-        SizedBox(
-          width: kPadding * 4,
-        ),
-        SvgPicture.asset(strShareIcon),
-        SizedBox(
-          width: kPadding * 4,
-        ),
-        SvgPicture.asset(strCalendar),
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(left: kPadding * 3, right: kPadding * 3),
+      child: Row(
+        children: [
+          SvgPicture.asset(strLocationSmallIcon),
+          SizedBox(
+            width: kPadding * 2,
+          ),
+          DropdownButton<String>(
+            dropdownColor: kbackgroundcolor,
+            underline: Container(color: kbackgroundcolor),
+            items: _cityName.map((String dropDownStringItem) {
+              return DropdownMenuItem<String>(
+                value: dropDownStringItem,
+                child: Text(
+                  dropDownStringItem,
+                  style: TextStyle(
+                      color: kColor, fontSize: 18, fontWeight: FontWeight.w500),
+                ),
+              );
+            }).toList(),
+            onChanged: (newValueSelected) {
+              setState(
+                () {
+                  print("selected$newValueSelected");
+                  _currentItemSelected = newValueSelected ?? "";
+                },
+              );
+            },
+            value: _currentItemSelected,
+          ),
+          Spacer(),
+          SvgPicture.asset(strShareIcon),
+          Spacer(),
+          SvgPicture.asset(strCalendar),
+        ],
+      ),
     );
   }
 }

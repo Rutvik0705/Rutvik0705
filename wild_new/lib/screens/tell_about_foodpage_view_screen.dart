@@ -1,14 +1,19 @@
 // import 'dart:ffi';
+import 'dart:ffi';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:wild_new/Widgets/logoHeaderScreen_widget.dart';
 import 'package:wild_new/utility/constant.dart';
 import 'package:wild_new/utility/image_string.dart';
 import 'package:wild_new/utility/text_string.dart';
 
+import 'location_permission_screen.dart';
+
+// ignore: must_be_immutable
 class AboutFoodScreen extends StatefulWidget {
   AboutFoodScreen();
   @override
@@ -19,6 +24,7 @@ class AboutFoodScreen extends StatefulWidget {
     RattingFoodPageTwo(),
     HungryTooListWidget(),
     BestInfluencers(),
+    UseLocation(),
   ];
 }
 
@@ -87,7 +93,9 @@ class AboutFoodScreenState extends State<AboutFoodScreen> {
 }
 
 /// HUNGRY TOO LIST WIDGET....
+// ignore: must_be_immutable
 class HungryTooListWidget extends StatelessWidget {
+  // ignore: non_constant_identifier_names
   var FoodGridView = [
     '🥑',
     '🥐',
@@ -178,9 +186,6 @@ class RattingFoodPageTwo extends StatelessWidget {
       children: [
         Column(
           children: [
-            // SizedBox(
-            //   height: kPadding * 6.8,
-            // ),
             Row(
               children: [
                 Text(
@@ -452,7 +457,9 @@ class AboutFoodPageOne extends StatelessWidget {
 // }
 
 ///BEST INFLUENCERS....
+// ignore: must_be_immutable
 class BestInfluencers extends StatelessWidget {
+  // ignore: non_constant_identifier_names
   var InfluencerDetail = [
     strUserProfile,
     strUserSecondprofile,
@@ -460,6 +467,15 @@ class BestInfluencers extends StatelessWidget {
     strUsreForthPfofileIN,
     strUserProfile,
     strUserSecondprofile,
+  ];
+  // ignore: non_constant_identifier_names
+  var InfluencerName = [
+    "chefchadwhite",
+    "chefboyarduff",
+    "spokaneeats",
+    "Thelinlander",
+    "Influencer5",
+    "Influencer6",
   ];
   @override
   Widget build(BuildContext context) {
@@ -474,36 +490,64 @@ class BestInfluencers extends StatelessWidget {
             ),
           ],
         ),
-        Container(
-          // color: Colors.yellow,
-          height: InfluencerDetail.length * 200 / 2,
-          child: GridView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
+        SizedBox(
+          height: kPadding * 4.8,
+        ),
+        Expanded(
+          child: Container(
+            child: GridView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: kPadding,
+                mainAxisSpacing: kPadding * 1,
+              ),
+              itemCount: InfluencerDetail.length,
+              itemBuilder: (BuildContext ctx, index) {
+                return Column(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        border: Border.all(color: kColor, width: 2),
+                        image: DecorationImage(
+                            image: AssetImage(
+                              InfluencerDetail[index],
+                            ),
+                            fit: BoxFit.cover),
+                      ),
+                      child: Container(
+                        width: 100,
+                        height: 100,
+                        alignment: Alignment.center,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(50),
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          border: Border.all(color: kbackgroundcolor, width: 3),
+                          image: DecorationImage(
+                              image: AssetImage(
+                                InfluencerDetail[index],
+                              ),
+                              fit: BoxFit.cover),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: kPadding),
+                    Text(InfluencerName[index],
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1!
+                            .copyWith(fontSize: 17)),
+                  ],
+                );
+              },
             ),
-            itemCount: InfluencerDetail.length,
-            itemBuilder: (BuildContext ctx, index) {
-              return Container(
-                // color: Colors.yellow,
-                alignment: Alignment.center,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(50),
-                  ),
-                  child: Image.asset(
-                    InfluencerDetail[index],
-                    height: 100,
-                  ),
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  border: Border.all(color: kbackgroundcolor),
-                ),
-              );
-            },
           ),
-        )
+        ),
       ],
     );
   }
@@ -520,3 +564,128 @@ class BestInfluencers extends StatelessWidget {
 //       // currentPageNotifier: _currentPageNotifier,
 //       );
 // }
+
+////USE LOCATION.....
+
+class UseLocation extends StatelessWidget {
+  late int selectedIndex = 3;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Use location",
+          style: Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 26),
+        ),
+        Spacer(),
+        Center(
+          child: Container(
+            // height: 482,
+            decoration: BoxDecoration(
+              border: Border.all(color: kColor, width: 1),
+              borderRadius: BorderRadius.all(Radius.circular(15)),
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: kPadding * 3, horizontal: kPadding * 3),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Allow “WILD” to access\nyour location while you\nare using the app?",
+                        style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                            fontSize: 20, fontWeight: FontWeight.w700),
+                      ),
+                      SizedBox(height: kPadding * 2),
+                      Text(
+                        "Your current location is used\nby WILD AI to find you\nnearby restaurants, bars and\nother places based on what\nyou doing.",
+                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            fontSize: 18, fontWeight: FontWeight.w400),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 240,
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: arrLocationPermission.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        child: Column(
+                          children: [
+                            Divider(
+                              color: kColor,
+                              height: kPadding * 5,
+                            ),
+                            Container(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  // Padding(
+                                  //   padding:
+                                  //       EdgeInsets.only(left: kPadding * 3),
+                                  //   child: Container(
+                                  //     child: selectedIndex == index
+                                  //         ? SvgPicture.asset(
+                                  //             strTrueIcon,
+                                  //             width: kPadding * 2,
+                                  //           )
+                                  //         : Container(
+                                  //             width: kPadding * 2,
+                                  //           ),
+                                  //   ),
+                                  // ),
+                                  // SizedBox(width: kPadding),
+                                  InkWell(
+                                    onTap: () {
+                                      // checkLocationPermission();
+                                    },
+                                    child: Container(
+                                      child: Text(
+                                        arrLocationPermission[index],
+                                        style: index == 2
+                                            ? Theme.of(context)
+                                                .textTheme
+                                                .headline5!
+                                                .copyWith(
+                                                  fontWeight: FontWeight.w800,
+                                                )
+                                            : Theme.of(context)
+                                                .textTheme
+                                                .headline5,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            // Padding(
+                            //   padding: EdgeInsets.all(kPadding * 2.5),
+                            //   child: Container(
+                            //     color: Colors.white,
+                            //     height: 0.5,
+                            //     width: 900,
+                            //   ),
+                            // )
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Spacer(),
+      ],
+    );
+  }
+}
