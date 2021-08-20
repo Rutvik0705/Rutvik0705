@@ -1,17 +1,14 @@
 // import 'dart:ffi';
-import 'dart:ffi';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:wild_new/Widgets/logoHeaderScreen_widget.dart';
 import 'package:wild_new/utility/constant.dart';
 import 'package:wild_new/utility/image_string.dart';
 import 'package:wild_new/utility/text_string.dart';
-
 import 'location_permission_screen.dart';
+import 'review_bar_Screen.dart';
 
 // ignore: must_be_immutable
 class AboutFoodScreen extends StatefulWidget {
@@ -38,9 +35,7 @@ class AboutFoodScreenState extends State<AboutFoodScreen> {
   }
 
   void _pageChanged(int index) {
-    setState(() {
-      print("dfgfvsdfvcej kdgfbjdnsfijvckmhnwijdksfncijkmsdn");
-    });
+    setState(() {});
   }
 
   @override
@@ -119,9 +114,6 @@ class HungryTooListWidget extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          // SizedBox(
-          //   height: kPadding * 6.8,
-          // ),
           Row(
             children: [
               Text(
@@ -289,13 +281,24 @@ class RattingFoodPageTwo extends StatelessWidget {
                 ),
               ],
             ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: SvgPicture.asset(strRightArrow),
-            )
+            RightSideArrowwidget()
           ],
         ),
       ],
+    );
+  }
+}
+
+class RightSideArrowwidget extends StatelessWidget {
+  const RightSideArrowwidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.bottomRight,
+      child: SvgPicture.asset(strRightArrow),
     );
   }
 }
@@ -548,6 +551,7 @@ class BestInfluencers extends StatelessWidget {
             ),
           ),
         ),
+        RightSideArrowwidget(),
       ],
     );
   }
@@ -567,6 +571,7 @@ class BestInfluencers extends StatelessWidget {
 
 ////USE LOCATION.....
 
+// ignore: must_be_immutable
 class UseLocation extends StatelessWidget {
   late int selectedIndex = 3;
 
@@ -665,15 +670,6 @@ class UseLocation extends StatelessWidget {
                                 ],
                               ),
                             ),
-
-                            // Padding(
-                            //   padding: EdgeInsets.all(kPadding * 2.5),
-                            //   child: Container(
-                            //     color: Colors.white,
-                            //     height: 0.5,
-                            //     width: 900,
-                            //   ),
-                            // )
                           ],
                         ),
                       );
@@ -685,6 +681,17 @@ class UseLocation extends StatelessWidget {
           ),
         ),
         Spacer(),
+        InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ReviewBarScreen(),
+              ),
+            );
+          },
+          child: RightSideArrowwidget(),
+        ),
       ],
     );
   }

@@ -49,32 +49,7 @@ class ListDetailScreenState extends State<ListDetailScreen> {
                   Positioned(
                     top: kPadding * 25,
                     left: kPadding * 2.3,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          width: 3,
-                          color: kColor,
-                        ),
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                          width: 3,
-                          color: kbackgroundcolor,
-                        ),
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(45),
-                          ),
-                          child: Image.asset(
-                            strDrinksLogoImage,
-                          ),
-                        ),
-                      ),
-                    ),
+                    child: DrinksLogoImageWidget(),
                   ),
                   Positioned(
                     top: kPadding * 32,
@@ -351,6 +326,42 @@ class ListDetailScreenState extends State<ListDetailScreen> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class DrinksLogoImageWidget extends StatelessWidget {
+  const DrinksLogoImageWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          width: 2,
+          color: kColor,
+        ),
+        borderRadius: BorderRadius.circular(100),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            width: 3,
+            color: kbackgroundcolor,
+          ),
+          borderRadius: BorderRadius.circular(100),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(
+            Radius.circular(45),
+          ),
+          child: Image.asset(
+            strDrinksLogoImage,
+          ),
         ),
       ),
     );

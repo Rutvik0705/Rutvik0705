@@ -69,7 +69,9 @@ class SecondCodeScreenState extends State<SendCodeScreen> {
                   children: [
                     Text(srtSubmit,
                         style: Theme.of(context).textTheme.headline5),
-                    Padding(padding: EdgeInsets.only(left: 15)),
+                    SizedBox(
+                      width: kPadding,
+                    ),
                     SvgPicture.asset(strRightArrow),
                   ],
                 ),
