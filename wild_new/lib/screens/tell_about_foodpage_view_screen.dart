@@ -1,4 +1,3 @@
-// import 'dart:ffi';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -89,8 +88,18 @@ class AboutFoodScreenState extends State<AboutFoodScreen> {
 
 /// HUNGRY TOO LIST WIDGET....
 // ignore: must_be_immutable
-class HungryTooListWidget extends StatelessWidget {
-  // ignore: non_constant_identifier_names
+class HungryTooListWidget extends StatefulWidget {
+  HungryTooListWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<HungryTooListWidget> createState() => _HungryTooListWidgetState();
+}
+
+class _HungryTooListWidgetState extends State<HungryTooListWidget> {
+  int selectedFood = 0;
+
   var FoodGridView = [
     '🥑',
     '🥐',
@@ -105,9 +114,8 @@ class HungryTooListWidget extends StatelessWidget {
     '🌮',
     '🌯',
   ];
-  HungryTooListWidget({
-    Key? key,
-  }) : super(key: key);
+
+  // int get index = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -135,13 +143,23 @@ class HungryTooListWidget extends StatelessWidget {
               ),
               itemCount: FoodGridView.length,
               itemBuilder: (BuildContext ctx, index) {
-                return Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    FoodGridView[index],
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
+                return InkWell(
+                  onTap: () {
+                    setState(() {
+                      selectedFood = index;
+                    });
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      FoodGridView[index],
+                    ),
+                    decoration: BoxDecoration(
+                      color: selectedFood == index
+                          ? Color(0xBF83A09B)
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(100),
+                    ),
                   ),
                 );
               },
@@ -230,7 +248,7 @@ class RattingFoodPageTwo extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: kPadding * 5,
+              height: kPadding * 7,
             ),
             RattingfoodWidget(),
           ],
@@ -304,11 +322,16 @@ class RightSideArrowwidget extends StatelessWidget {
 }
 
 ///RATTING FOOD WIDGET....
-class RattingfoodWidget extends StatelessWidget {
+class RattingfoodWidget extends StatefulWidget {
   const RattingfoodWidget({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<RattingfoodWidget> createState() => _RattingfoodWidgetState();
+}
+
+class _RattingfoodWidgetState extends State<RattingfoodWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
