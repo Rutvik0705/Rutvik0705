@@ -40,7 +40,7 @@ class ConfirmationState extends State<Confirmation> {
             LogoHeaderScreen(),
             Spacer(),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: kPadding * 4),
+              padding: EdgeInsets.symmetric(horizontal: kPadding * 4),
               child: Row(
                 children: [
                   Text(
@@ -52,7 +52,7 @@ class ConfirmationState extends State<Confirmation> {
             ),
             SizedBox(height: kPadding * 2),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: kPadding * 4),
+              padding: EdgeInsets.symmetric(horizontal: kPadding * 4),
               child: Row(
                 children: [
                   Text(
@@ -63,7 +63,7 @@ class ConfirmationState extends State<Confirmation> {
                 ],
               ),
             ),
-            Spacer(),
+            Spacer(flex: 2),
           ],
         ),
       ),

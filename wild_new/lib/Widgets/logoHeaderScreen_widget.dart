@@ -13,6 +13,7 @@ class LogoHeaderScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            // SizedBox(height: kPadding * 3),
             SvgPicture.asset(strWildLogoIcon),
           ],
         ),
@@ -24,32 +25,28 @@ class LogoHeaderScreen extends StatelessWidget {
 class LogoHeaderWithMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: kbackgroundcolor,
-      child: SafeArea(
-        child: Row(
-          children: [
-            Spacer(
-              flex: 3,
-            ),
-            SvgPicture.asset(strWildLogoIcon),
-            Spacer(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: kPadding * 3),
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DrawerScreen(),
-                    ),
-                  );
-                },
-                child: SvgPicture.asset(strMenue),
-              ),
-            ),
-          ],
-        ),
+    return SafeArea(
+      child: Row(
+        children: [
+          SvgPicture.asset(
+            strMenue,
+            color: Colors.transparent,
+          ),
+          Spacer(),
+          SvgPicture.asset(strWildLogoIcon),
+          Spacer(),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DrawerScreen(),
+                ),
+              );
+            },
+            child: SvgPicture.asset(strMenue),
+          ),
+        ],
       ),
     );
   }
@@ -62,10 +59,7 @@ class WildLogoMenueIconWhite extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            child: SvgPicture.asset(
-              strMenue,
-              color: Colors.transparent
-            ),
+            child: SvgPicture.asset(strMenue, color: Colors.transparent),
           ),
           Spacer(),
           SvgPicture.asset(strOnlyWildIconWhite),
@@ -90,8 +84,4 @@ class WildLogoMenueIconWhite extends StatelessWidget {
   }
 }
 
-// @override
-// State<StatefulWidget> createState() {
-//   // TODO: implement createState
-//   throw UnimplementedError();
-// }
+

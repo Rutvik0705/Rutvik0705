@@ -37,7 +37,7 @@ const String strBackSliderPicture = "assets/image/back_slid_picture.png";
 const String strRightArrowSliderScreen =
     "assets/image/right_arrow_slide_screen.svg";
 const String strDrinksLogoImage = "assets/image/drinks_logo_image.png";
-const String strLikeIcon = "assets/image/like_icon.svg";
+const String strLikeIcon = "assets/image/Like_icon_image.png";
 const String strOpenTableDetailScreen =
     "assets/image/opentable_list_detail.png";
 const String strInstagramLogo = "assets/image/instagram_logo.svg";

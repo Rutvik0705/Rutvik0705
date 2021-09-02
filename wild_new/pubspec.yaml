@@ -30,11 +30,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^0.22.0
   flutter_otp: ^0.3.2
-  # location: ^4.3.0
-  # contacts_service: ^0.6.1
+  location: ^4.3.0
+  contacts_service: ^0.6.1
   permission_handler: ^8.1.4+2
   flutter_rating_bar: ^4.0.0
-  page_view_indicators: ^2.0.0
+  dotted_line: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -67,10 +67,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: Gotham
+      fonts:
+        - asset: assets/Gotham/Gotham-Book.otf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

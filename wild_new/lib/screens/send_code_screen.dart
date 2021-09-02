@@ -15,18 +15,18 @@ class SendCodeScreen extends StatefulWidget {
 }
 
 class SecondCodeScreenState extends State<SendCodeScreen> {
+  TextEditingController mobileNumber = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding * 2),
+          padding: EdgeInsets.only(left: kPadding * 3, right: kPadding * 3),
           child: Column(
             children: [
               LogoHeaderScreen(),
-              SizedBox(
-                height: kPadding * 6,
-              ),
+              SizedBox(height: MediaQuery.of(context).size.height / 100 * 5),
               BackbuttonWithTitleWidget(
                 navigationTitle: strSendCode,
                 onClickBack: () {
@@ -39,45 +39,54 @@ class SecondCodeScreenState extends State<SendCodeScreen> {
                 style: Theme.of(context).textTheme.headline3,
                 maxLines: 3,
               ),
-              SizedBox(height: kDefaultPadding * 2),
+              SizedBox(height: MediaQuery.of(context).size.height / 100 * 5),
               Container(
                 height: 64,
                 decoration: BoxDecoration(
                     color: kbottomAppBarcolor,
                     borderRadius: BorderRadius.circular(32)),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
                 child: Center(
                   child: TextField(
+                    controller: mobileNumber,
                     decoration: InputDecoration(
                         border: InputBorder.none,
                         hintStyle: TextStyle(color: Colors.black)),
                   ),
                 ),
               ),
-              SizedBox(height: kDefaultPadding * 2),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Verification(),
+              SizedBox(height: MediaQuery.of(context).size.height / 100 * 2),
+              Row(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              Verification(sendNumber: mobileNumber.text),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: 50,
+                      width: 140,
+                      child: Row(
+                        children: [
+                          Text(srtSubmit,
+                              style: Theme.of(context).textTheme.headline5),
+                          SizedBox(
+                            width: kPadding,
+                          ),
+                          SvgPicture.asset(strRightArrow),
+                        ],
+                      ),
                     ),
-                  );
-                },
-                child: Row(
-                  children: [
-                    Text(srtSubmit,
-                        style: Theme.of(context).textTheme.headline5),
-                    SizedBox(
-                      width: kPadding,
-                    ),
-                    SvgPicture.asset(strRightArrow),
-                  ],
-                ),
+                  ),
+                ],
               ),
               Spacer(
-                flex: 2,
+                flex: 3,
               )
             ],
           ),

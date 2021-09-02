@@ -6,7 +6,6 @@ import 'package:wild_new/utility/constant.dart';
 import 'package:wild_new/utility/image_string.dart';
 import 'package:wild_new/utility/text_string.dart';
 import '../Widgets/logoHeaderScreen_widget.dart';
-// ignore: unused_import
 import 'list_detail_screen.dart';
 
 class CheersScreen extends StatefulWidget {
@@ -15,97 +14,216 @@ class CheersScreen extends StatefulWidget {
 }
 
 class CheersScreenState extends State<CheersScreen> {
+  bool searchBar = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(
-              right: kPadding * 2.8, left: kPadding * 2.8),
+          padding: EdgeInsets.only(left: kPadding * 2.6, right: kPadding * 2.6),
           child: Column(
             children: [
               WildLogoMenueIconWhite(),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: kPadding * 3.6,
-                ),
-                child: Row(
+              Expanded(
+                child: Stack(
                   children: [
-                    Image.asset(strCheersGlass),
-                    SizedBox(
-                      width: kPadding * 2,
-                    ),
-                    Text(
-                      strCheers,
-                      style: Theme.of(context).textTheme.headline3!.copyWith(
-                            fontSize: 38,
-                            fontWeight: FontWeight.w200,
-                          ),
-                    ),
-                    Spacer(),
-                    SvgPicture.asset(strSearchIcon),
-                  ],
-                ),
-              ),
-              Row(
-                children: [
-                  Column(
-                    children: [
-                      Text(
-                        strIfoundNear,
-                        style: Theme.of(context).textTheme.headline5!.copyWith(
-                              color: kColor,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 20,
-                            ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: kPadding * 2.8,
-                  ),
-                  RichText(
-                    text: TextSpan(
+                    Column(
                       children: [
-                        TextSpan(
-                          text: strNoteCheersScreen,
-                          style:
-                              Theme.of(context).textTheme.headline4!.copyWith(
-                                    color: kColor,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 13,
-                                  ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 100 * 4,
                         ),
-                        TextSpan(
-                          text: strSomeMayBeClosed,
-                          style:
-                              Theme.of(context).textTheme.headline4!.copyWith(
-                                    color: kColor,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 13,
-                                    letterSpacing: 0,
+                        Row(
+                          children: [
+                            Image.asset(strCheersGlass),
+                            SizedBox(
+                              width: kPadding * 2,
+                            ),
+                            Text(
+                              strCheers,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline3!
+                                  .copyWith(
+                                    fontSize: 38,
+                                    fontWeight: FontWeight.w200,
                                   ),
-                        )
+                            ),
+                            Spacer(),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  searchBar = true;
+                                });
+                              },
+                              child: SvgPicture.asset(strSearchIcon),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 100 * 4,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              strIfoundNear,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5!
+                                  .copyWith(
+                                      color: kColor,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 20,
+                                      letterSpacing: 0),
+                            ),
+                            Spacer(),
+                            Container(
+                              width: MediaQuery.of(context).size.width - 190,
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: strNoteCheersScreen,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline4!
+                                          .copyWith(
+                                            color: kColor,
+                                            fontSize: 13,
+                                            letterSpacing: 0,
+                                          ),
+                                    ),
+                                    TextSpan(
+                                      text: strSomeMayBeClosed,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline4!
+                                          .copyWith(
+                                            color: kColor,
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 13,
+                                            letterSpacing: 0,
+                                          ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        Divider(
+                          height: 40,
+                          color: kColor,
+                          indent: 130,
+                          thickness: 0.5,
+                        ),
+                        SizedBox(
+                          height: kPadding,
+                        ),
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: 4,
+                            itemBuilder: (context, child) {
+                              return DrinkListWidget(
+                                isFavourite: false,
+                              );
+                            },
+                          ),
+                        ),
                       ],
                     ),
-                  )
-                ],
-              ),
-              Divider(
-                height: 40,
-                color: kColor,
-                indent: 150,
-                thickness: 0.5,
-              ),
-              SizedBox(
-                height: kPadding,
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: 4,
-                  itemBuilder: (context, child) {
-                    return DrinkListWidget();
-                  },
+                    searchBar
+                        ? Container(
+                            height: double.infinity,
+                            width: double.infinity,
+                            color: Color.fromRGBO(0, 0, 0, 0.85),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.height /
+                                        100 *
+                                        4),
+                                Row(
+                                  children: [
+                                    Container(
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              100 *
+                                              5.5,
+                                      width: MediaQuery.of(context).size.width /
+                                          1.3,
+                                      decoration: BoxDecoration(
+                                          color: kSearchBarColorChearsScreen,
+                                          borderRadius:
+                                              BorderRadius.circular(32)),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: kDefaultPadding),
+                                      child: Center(
+                                        child: TextField(
+                                          decoration: InputDecoration(
+                                              border: InputBorder.none,
+                                              hintStyle: TextStyle(
+                                                  color: Colors.black)),
+                                        ),
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    SvgPicture.asset(strSearchIcon)
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: MediaQuery.of(context).size.height /
+                                      100 *
+                                      4,
+                                ),
+                                Text(
+                                  strCravingMediterranean,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle2!
+                                      .copyWith(fontSize: 26),
+                                ),
+                                SizedBox(
+                                  height: MediaQuery.of(context).size.height /
+                                      100 *
+                                      5,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      searchBar = false;
+                                    });
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 150,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SvgPicture.asset(
+                                          strCloseIcon,
+                                          color: kColor,
+                                        ),
+                                        SizedBox(
+                                          width: kPadding,
+                                        ),
+                                        Text(
+                                          "CANCEL",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline4!
+                                              .copyWith(
+                                                  color: kColor, fontSize: 15),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        : Container()
+                  ],
                 ),
               ),
             ],
@@ -117,8 +235,11 @@ class CheersScreenState extends State<CheersScreen> {
 }
 
 class DrinkListWidget extends StatefulWidget {
+  final bool isFavourite;
+
   const DrinkListWidget({
     Key? key,
+    required this.isFavourite,
   }) : super(key: key);
 
   @override
@@ -134,10 +255,10 @@ class _DrinkListWidgetState extends State<DrinkListWidget> {
           children: [
             Text(
               strDurkinsBar,
-              style: Theme.of(context)
-                  .textTheme
-                  .overline!
-                  .copyWith(fontSize: 24, fontWeight: FontWeight.w300),
+              style: Theme.of(context).textTheme.overline!.copyWith(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w300,
+                  color: kWhiteColor),
             ),
             Spacer(),
             InkWell(
@@ -150,30 +271,42 @@ class _DrinkListWidgetState extends State<DrinkListWidget> {
                 );
               },
               child: Padding(
-                padding: const EdgeInsets.only(right: 2),
-                child: Container(
-                  height: 22,
-                  width: 48,
-                  decoration: BoxDecoration(
-                    color: Colors.green[200],
-                    boxShadow: [
-                      BoxShadow(
-                        offset: Offset(3, 3),
-                        color: Colors.green,
-                        // blurRadius:
+                padding: EdgeInsets.only(right: 2),
+                child: widget.isFavourite
+                    ? InkWell(
+                        onTap: () {},
+                        child: Container(
+                          height: 30,
+                          width: 30,
+                          child: Image.asset(
+                            strLikeIcon,
+                            color: kTextColor,
+                          ),
+                        ),
+                      )
+                    : Container(
+                        height: 22,
+                        width: 48,
+                        decoration: BoxDecoration(
+                          color: Colors.green[100],
+                          boxShadow: [
+                            BoxShadow(
+                              offset: Offset(3, 3),
+                              color: Colors.green,
+                            ),
+                          ],
+                        ),
+                        child: Center(
+                          child: Text(
+                            "OPEN",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1!
+                                .copyWith(
+                                    fontSize: kPadding, color: Colors.green),
+                          ),
+                        ),
                       ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Text(
-                      "OPEN",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .copyWith(fontSize: kPadding, color: Colors.green),
-                    ),
-                  ),
-                ),
               ),
             ),
           ],
@@ -191,21 +324,10 @@ class _DrinkListWidgetState extends State<DrinkListWidget> {
               itemCount: 5,
               ratingWidget: RatingWidget(
                 full: Icon(Icons.star, color: Colors.grey),
-                half: Icon(
-                  Icons.star_half,
-                  color: Colors.grey,
-                ),
-                empty: Icon(
-                  Icons.star_outline,
-                  color: Colors.grey,
-                ),
+                half: Icon(Icons.star_half, color: Colors.grey),
+                empty: Icon(Icons.star_outline, color: Colors.grey),
               ),
               onRatingUpdate: (double value) {},
-              /* onRatingUpdate: (value) {
-                  setState(() {
-                    _ratingValue = value;
-                  });
-                }*/
             ),
           ],
         ),
@@ -217,31 +339,33 @@ class _DrinkListWidgetState extends State<DrinkListWidget> {
                 SizedBox(
                   height: 19,
                 ),
-                Text(
-                  strAddressBar,
-                  style: Theme.of(context).textTheme.headline5!.copyWith(
-                        fontWeight: FontWeight.w400,
-                      ),
+                Container(
+                  width: MediaQuery.of(context).size.width - 160,
+                  child: Text(
+                    strAddressBar,
+                    style: Theme.of(context).textTheme.headline5!.copyWith(
+                          fontWeight: FontWeight.w400,
+                        ),
+                  ),
                 ),
                 SizedBox(
                   height: 19,
                 ),
                 Text(
-                  "(509) 863-9501",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline5!
-                      .copyWith(fontWeight: FontWeight.w400, color: kColor),
+                  " (509) 863-9501",
+                  style: Theme.of(context).textTheme.headline5!.copyWith(
+                      fontWeight: FontWeight.w400, color: kWhiteColor),
                 ),
                 SizedBox(
                   height: 7,
                 ),
-                Text(
-                  strWebCom,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline5!
-                      .copyWith(fontWeight: FontWeight.w400, color: kColor),
+                Container(
+                  width: MediaQuery.of(context).size.width - 160,
+                  child: Text(
+                    strWebCom,
+                    style: Theme.of(context).textTheme.headline5!.copyWith(
+                        fontWeight: FontWeight.w400, color: kWhiteColor),
+                  ),
                 ),
               ],
             ),

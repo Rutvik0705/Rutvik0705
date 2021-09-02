@@ -20,83 +20,74 @@ class ListDetailScreenState extends State<ListDetailScreen> {
         child: Column(
           children: [
             Container(
-              height: 400,
+              height: MediaQuery.of(context).size.width + -20,
               child: Stack(
                 children: [
                   Container(
+                    height: MediaQuery.of(context).size.width - 80,
                     child: Image.asset(
                       strBackSliderPicture,
-                      width: 415,
-                      height: 299,
-                      fit: BoxFit.fitWidth,
+                      fit: BoxFit.cover,
                     ),
                   ),
                   SafeArea(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: kPadding * 2.9),
+                      padding: EdgeInsets.symmetric(horizontal: kPadding * 2.9),
                       child: WildLogoMenueIconWhite(),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: kPadding * 16, right: kPadding * 2.2),
+                  Positioned(
+                    top: MediaQuery.of(context).size.height / 100 * 20,
+                    right: MediaQuery.of(context).size.height / 100 * 3,
                     child: Container(
-                      alignment: Alignment.topRight,
                       child: SvgPicture.asset(strRightArrowSliderScreen),
                     ),
                   ),
                   Positioned(
-                    top: kPadding * 25,
-                    left: kPadding * 2.3,
+                    top: MediaQuery.of(context).size.height / 100 * 31,
+                    left: MediaQuery.of(context).size.height / 100 * 4,
                     child: DrinksLogoImageWidget(),
                   ),
                   Positioned(
-                    top: kPadding * 32,
-                    right: kPadding * 2.3,
+                    top: MediaQuery.of(context).size.height / 100 * 40,
+                    right: MediaQuery.of(context).size.height / 100 * 3,
                     child: InkWell(
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => InviteFriendViaSmsScreen(),
+                          builder: (context) => InviteFriendScreen(),
                         ),
                       ),
-                      child: SvgPicture.asset(strLikeIcon),
-                    ),
-                  ),
-                  Positioned(
-                    top: kPadding * 36,
-                    left: kPadding * 3,
-                    right: kPadding * 2.8,
-                    child: Row(
-                      children: [
-                        Text(
-                          strDurkinsBar,
-                          style: Theme.of(context).textTheme.overline!.copyWith(
-                                fontSize: 28,
-                                fontWeight: FontWeight.w300,
-                              ),
-                        ),
-                      ],
+                      child: Container(
+                        height: 30,
+                        width: 30,
+                        child: Image.asset(strLikeIcon),
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                  left: kPadding * 2.8, right: kPadding * 2.8),
+              padding: EdgeInsets.symmetric(horizontal: kPadding * 2.6),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: kPadding,
+                  Row(
+                    children: [
+                      Text(
+                        strDurkinsBar,
+                        style: Theme.of(context).textTheme.overline!.copyWith(
+                            fontSize: 28,
+                            fontWeight: FontWeight.w300,
+                            color: kWhiteColor),
+                      ),
+                    ],
                   ),
                   Divider(
                     color: kColor,
                   ),
                   SizedBox(
-                    height: kPadding * 2,
-                  ),
+                      height: MediaQuery.of(context).size.height / 100 * 2),
                   Row(
                     children: [
                       RatingBar(
@@ -117,24 +108,22 @@ class ListDetailScreenState extends State<ListDetailScreen> {
                           ),
                         ),
                         onRatingUpdate: (double value) {},
-                        /*onRatingUpdate: (value) {
-                            setState(() {
-                              _ratingValue = value;
-                            });
-                          }*/
+                        // onRatingUpdate: (value) {
+                        //     setState(() {
+                        //       _ratingValue = value;
+                        //     });
+                        //   }
                       ),
                       Spacer(),
                       InkWell(
-                        onTap: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => ListDetailScreen(),
-                          //   ),
-                          // );
-                        },
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => InviteFriendScreen(),
+                          ),
+                        ),
                         child: Padding(
-                          padding: const EdgeInsets.only(right: 2),
+                          padding: EdgeInsets.only(right: 2),
                           child: Container(
                             height: 22,
                             width: 48,
@@ -144,7 +133,6 @@ class ListDetailScreenState extends State<ListDetailScreen> {
                                 BoxShadow(
                                   offset: Offset(3, 3),
                                   color: Colors.green,
-                                  // blurRadius:
                                 ),
                               ],
                             ),
@@ -172,13 +160,18 @@ class ListDetailScreenState extends State<ListDetailScreen> {
                           SizedBox(
                             height: kPadding * 2,
                           ),
-                          Text(
-                            strAddressBar,
-                            style:
-                                Theme.of(context).textTheme.headline5!.copyWith(
-                                      fontWeight: FontWeight.w400,
-                                      letterSpacing: 0,
-                                    ),
+                          Container(
+                            width: MediaQuery.of(context).size.width - 160,
+                            child: Text(
+                              strAddressBar,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5!
+                                  .copyWith(
+                                    letterSpacing: 0,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                            ),
                           ),
                           SizedBox(
                             height: 19,
@@ -189,18 +182,24 @@ class ListDetailScreenState extends State<ListDetailScreen> {
                                 .textTheme
                                 .headline5!
                                 .copyWith(
-                                    fontWeight: FontWeight.w400, color: kColor),
+                                    fontWeight: FontWeight.w400,
+                                    color: kWhiteColor),
                           ),
                           SizedBox(
                             height: 7,
                           ),
-                          Text(
-                            strWebCom,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5!
-                                .copyWith(
-                                    fontWeight: FontWeight.w400, color: kColor),
+                          Container(
+                            width: MediaQuery.of(context).size.width - 160,
+                            child: Text(
+                              strWebCom,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5!
+                                  .copyWith(
+                                      letterSpacing: 0,
+                                      fontWeight: FontWeight.w400,
+                                      color: kWhiteColor),
+                            ),
                           ),
                         ],
                       ),
@@ -220,6 +219,9 @@ class ListDetailScreenState extends State<ListDetailScreen> {
                                       fontWeight: FontWeight.w500,
                                     ),
                               ),
+                              SizedBox(
+                                width: kPadding * 0.8,
+                              ),
                               SvgPicture.asset(strClocktime)
                             ],
                           ),
@@ -238,6 +240,7 @@ class ListDetailScreenState extends State<ListDetailScreen> {
                                       fontWeight: FontWeight.w500,
                                     ),
                               ),
+                              SizedBox(width: kPadding * 0.8),
                               SvgPicture.asset(strLocationSmallIcon),
                             ],
                           ),
@@ -285,8 +288,9 @@ class ListDetailScreenState extends State<ListDetailScreen> {
                     children: [
                       Text(
                         strA_NattyUpscaleDiner,
-                        style: Theme.of(context).textTheme.headline5!.copyWith(
+                        style: Theme.of(context).textTheme.headline4!.copyWith(
                             fontWeight: FontWeight.w400,
+                            letterSpacing: 0,
                             color: kColor,
                             fontSize: 16),
                       )

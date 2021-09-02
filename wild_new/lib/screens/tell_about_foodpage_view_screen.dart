@@ -1,20 +1,25 @@
 import 'dart:ui';
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:wild_new/Widgets/logoHeaderScreen_widget.dart';
+import 'package:wild_new/Widgets/ratting_food_Widget.dart';
 import 'package:wild_new/utility/constant.dart';
 import 'package:wild_new/utility/image_string.dart';
 import 'package:wild_new/utility/text_string.dart';
 import 'location_permission_screen.dart';
-import 'review_bar_Screen.dart';
+import 'bar_review_Screen.dart';
 
 // ignore: must_be_immutable
 class AboutFoodScreen extends StatefulWidget {
   AboutFoodScreen();
   @override
   AboutFoodScreenState createState() => AboutFoodScreenState();
+}
 
+class AboutFoodScreenState extends State<AboutFoodScreen> {
+  final PageController controller = PageController();
   var allPages = [
     AboutFoodPageOne(),
     RattingFoodPageTwo(),
@@ -22,11 +27,7 @@ class AboutFoodScreen extends StatefulWidget {
     BestInfluencers(),
     UseLocation(),
   ];
-}
-
-class AboutFoodScreenState extends State<AboutFoodScreen> {
-  final PageController controller = PageController();
-  // final _currentPageNotifier = ValueNotifier<int>(0);
+  int pagerIndex = 0;
 
   @override
   void initState() {
@@ -34,50 +35,41 @@ class AboutFoodScreenState extends State<AboutFoodScreen> {
   }
 
   void _pageChanged(int index) {
-    setState(() {});
+    setState(() {
+      pagerIndex = index;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kPadding * 3),
+        padding: EdgeInsets.symmetric(horizontal: kPadding * 3),
         child: SafeArea(
-          child: Column(
+          child: Stack(
             children: [
-              WildLogoMenueIconWhite(),
-              SizedBox(
-                height: kPadding * 3.8,
-              ),
-              Row(
+              Column(
                 children: [
-                  // _buildCircleIndicator(
-                  //   controller: controller,
-                  //   itemConunt: widget.allPages.length,
-                  // ),
-                  // Indicator(
-                  //   controller: controller,
-                  //   itemCount: widget.allPages.length,
-                  // ),
+                  WildLogoMenueIconWhite(),
+                  SizedBox(
+                      height: MediaQuery.of(context).size.height / 100 * 8),
+                  Expanded(
+                    child: PageView.builder(
+                      onPageChanged: _pageChanged,
+                      controller: controller,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: allPages.length,
+                      itemBuilder: (context, index) {
+                        return allPages[index];
+                      },
+                    ),
+                  ),
                 ],
               ),
-              SizedBox(
-                height: kPadding * 3,
-              ),
-              Flexible(
-                child: PageView.builder(
-                  onPageChanged: _pageChanged,
-                  controller: controller,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: widget.allPages.length,
-                  itemBuilder: (context, index) {
-                    return widget.allPages[index];
-                  },
-                  // onPageChanged: (int index) {
-                  //   _currentPageNotifier.value = index;
-                  // },
-                ),
-              ),
+              PageIndicator(
+                pagerIndex: pagerIndex,
+                totalPages: 5,
+              )
             ],
           ),
         ),
@@ -86,8 +78,44 @@ class AboutFoodScreenState extends State<AboutFoodScreen> {
   }
 }
 
+class PageIndicator extends StatelessWidget {
+  const PageIndicator({
+    Key? key,
+    required this.pagerIndex,
+    required this.totalPages,
+  }) : super(key: key);
+
+  final totalPages;
+  final int pagerIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: kPadding * 5),
+      child: Row(
+        children: [
+          for (int i = 0; i < totalPages; i++)
+            Row(
+              children: [
+                Container(
+                  width: 10,
+                  height: 10,
+                  decoration: BoxDecoration(
+                      color: pagerIndex == i ? Colors.white : Colors.grey[700],
+                      borderRadius: BorderRadius.circular(10)),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+              ],
+            ),
+        ],
+      ),
+    );
+  }
+}
+
 /// HUNGRY TOO LIST WIDGET....
-// ignore: must_be_immutable
 class HungryTooListWidget extends StatefulWidget {
   HungryTooListWidget({
     Key? key,
@@ -98,9 +126,10 @@ class HungryTooListWidget extends StatefulWidget {
 }
 
 class _HungryTooListWidgetState extends State<HungryTooListWidget> {
+  bool selectedFoodPopup = false;
   int selectedFood = 0;
 
-  var FoodGridView = [
+  var foodGridView = [
     '🥑',
     '🥐',
     '🥓',
@@ -115,68 +144,158 @@ class _HungryTooListWidgetState extends State<HungryTooListWidget> {
     '🌯',
   ];
 
-  // int get index = 1;
-
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Text(
-                "Pick all the ones you like…\nIs this making you\nhungry too?",
-                style: Theme.of(context)
-                    .textTheme
-                    .subtitle2!
-                    .copyWith(fontSize: 26),
-              ),
-            ],
-          ),
-          SizedBox(height: kPadding * 4),
-          Container(
-            height: FoodGridView.length * 120 / 3,
-            child: GridView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-              ),
-              itemCount: FoodGridView.length,
-              itemBuilder: (BuildContext ctx, index) {
-                return InkWell(
-                  onTap: () {
-                    setState(() {
-                      selectedFood = index;
-                    });
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      FoodGridView[index],
-                    ),
-                    decoration: BoxDecoration(
-                      color: selectedFood == index
-                          ? Color(0xBF83A09B)
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                  ),
-                );
-              },
-            ),
+          Text(
+            strPickAllTheOnesYou,
+            style:
+                Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 23),
           ),
           Spacer(),
-          Row(
+          Stack(
             children: [
-              Text(
-                "(You just burned .5 calories training)",
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w400,
-                    ),
-              )
+              Container(
+                height: foodGridView.length * 100 / 2.5,
+                child: GridView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      mainAxisSpacing: 5,
+                      crossAxisSpacing: 5),
+                  itemCount: foodGridView.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          selectedFood = index;
+                          selectedFoodPopup = true;
+                        });
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          foodGridView[index],
+                        ),
+                        decoration: BoxDecoration(
+                          color: selectedFood == index
+                              ? Color(0xBF83A09B)
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(60),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              selectedFoodPopup
+                  ? Container(
+                      height: 350,
+                      width: 350,
+                      decoration: BoxDecoration(
+                          color: Color.fromRGBO(255, 255, 255, 0.85),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Column(
+                        children: [
+                          Spacer(flex: 2),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Spacer(),
+                              Column(
+                                children: [
+                                  Image.asset(
+                                    "assets/image/Facebook Like.png",
+                                  ),
+                                  SizedBox(height: kPadding * 2),
+                                  Text(
+                                    "TAP\nTO LIKE",
+                                    textAlign: TextAlign.center,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline6!
+                                        .copyWith(color: kbackgroundcolor),
+                                  ),
+                                ],
+                              ),
+                              Spacer(),
+                              DottedLine(
+                                lineLength: 50,
+                                direction: Axis.vertical,
+                                lineThickness: 1,
+                                dashLength: 2,
+                                dashColor: Colors.black,
+                                dashGapLength: 2,
+                              ),
+                              Spacer(),
+                              Column(
+                                children: [
+                                  Image.asset(
+                                    "assets/image/Swipe Right.png",
+                                  ),
+                                  SizedBox(height: kPadding * 2),
+                                  Text(
+                                    "SWIPE\nTO REMOVE",
+                                    textAlign: TextAlign.center,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline6!
+                                        .copyWith(color: kbackgroundcolor),
+                                  ),
+                                ],
+                              ),
+                              Spacer(),
+                            ],
+                          ),
+                          Spacer(flex: 2),
+                          Divider(
+                            color: kbackgroundcolor,
+                          ),
+                          Spacer(),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                selectedFoodPopup = false;
+                              });
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(
+                                    "assets/image/Close_Got_It.svg"),
+                                SizedBox(
+                                  width: kPadding * 2,
+                                ),
+                                Text(
+                                  "GOT IT",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6!
+                                      .copyWith(color: kbackgroundcolor),
+                                )
+                              ],
+                            ),
+                          ),
+                          Spacer(),
+                        ],
+                      ),
+                    )
+                  : Container(),
             ],
-          )
+          ),
+          Spacer(),
+          Text(
+            strYouJustBurened,
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  fontSize: 16,
+                  letterSpacing: 0,
+                  fontWeight: FontWeight.w400,
+                ),
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height / 100)
         ],
       ),
     );
@@ -184,122 +303,155 @@ class _HungryTooListWidgetState extends State<HungryTooListWidget> {
 }
 
 ///RATTING FOOD PAGE TWO....
-class RattingFoodPageTwo extends StatelessWidget {
-  const RattingFoodPageTwo({
+// ignore: must_be_immutable
+class RattingFoodPageTwo extends StatefulWidget {
+  RattingFoodPageTwo({
     Key? key,
   }) : super(key: key);
 
+  
+
+  @override
+  State<RattingFoodPageTwo> createState() => _RattingFoodPageTwoState();
+}
+
+class _RattingFoodPageTwoState extends State<RattingFoodPageTwo> {
+  int onpageChange = 0;
+
+  void onpageChanged(int index) {
+    setState(() {
+      onpageChange = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return PageView(
-      scrollDirection: Axis.vertical,
+    return Stack(
       children: [
-        Column(
+        PageView(
+          onPageChanged: onpageChanged,
+          scrollDirection: Axis.vertical,
           children: [
-            Row(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Help me help you, Scott.",
+                  strHelpMeScott,
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle2!
+                      .copyWith(fontSize: 26, letterSpacing: 0,),
+                ),
+                Spacer(),
+                Text(
+                  strDoYouLikeFlatbread,
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle2!
+                      .copyWith(fontSize: 41,color: kWhiteColor),
+                ),
+                Spacer(),
+                Container(
+                  height: MediaQuery.of(context).size.width - 280,
+                  child: RattingfoodWidget(),
+                ),
+                Spacer(),
+                Divider(
+                  color: kColor,
+                  endIndent: 250,
+                  thickness: 2,
+                ),
+                Spacer(flex: 2),
+                Text(
+                  strWhatAboutCraft,
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle2!
+                      .copyWith(fontSize: 41,color: kWhiteColor),
+                ),
+                Spacer(),
+                Container(
+                  height: MediaQuery.of(context).size.width - 280,
+                  child: RattingfoodWidget(),
+                ),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  strThisOneIsPersonal,
                   style: Theme.of(context)
                       .textTheme
                       .subtitle2!
                       .copyWith(fontSize: 26),
                 ),
-              ],
-            ),
-            SizedBox(
-              height: kPadding * 4,
-            ),
-            Row(
-              children: [
+                Spacer(),
                 Text(
-                  "Do you like\nflatbread 🍕?",
+                  strAreYouPerson,
                   style: Theme.of(context)
                       .textTheme
                       .subtitle2!
-                      .copyWith(fontSize: 41),
+                      .copyWith(fontSize: 41,color: kWhiteColor),
                 ),
-              ],
-            ),
-            SizedBox(
-              height: kPadding * 5,
-            ),
-            RattingfoodWidget(),
-            SizedBox(
-              height: kPadding * 7,
-            ),
-            Divider(
-              color: kColor,
-              endIndent: 270,
-              thickness: 2,
-            ),
-            SizedBox(
-              height: kPadding * 8,
-            ),
-            Row(
-              children: [
-                Text(
-                  "What about\ncraft 🍺?",
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle2!
-                      .copyWith(fontSize: 41),
+                Spacer(),
+                Container(
+                  height: MediaQuery.of(context).size.width - 200,
+                  child: RattingfoodWidget(),
                 ),
-              ],
-            ),
-            SizedBox(
-              height: kPadding * 7,
-            ),
-            RattingfoodWidget(),
-          ],
-        ),
-        Column(
-          children: [
-            Spacer(),
-            Row(
-              children: [
+                Spacer(flex: 2),
                 Text(
-                  "This one is personal...",
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle2!
-                      .copyWith(fontSize: 26),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: kPadding * 8,
-            ),
-            Row(
-              children: [
-                Text(
-                  "Are you a 🍣\nperson?",
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle2!
-                      .copyWith(fontSize: 41),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: kPadding * 5,
-            ),
-            RattingfoodWidget(),
-            SizedBox(
-              height: kPadding * 20.9,
-            ),
-            Row(
-              children: [
-                Text(
-                  "You did great!\nNow, we’ll focus on\na few more of your\npreferences.",
+                  strYouGreatNowWell,
                   style: Theme.of(context)
                       .textTheme
                       .subtitle2!
                       .copyWith(fontSize: 30),
                 ),
+                RightSideArrowwidget(),
+                SizedBox(height: MediaQuery.of(context).size.height / 100 * 2),
               ],
             ),
-            RightSideArrowwidget()
+          ],
+        ),
+        VerticalPageViewWigdet(
+          onpageChange: onpageChange,
+          totalPages: 2,
+        ),
+      ],
+    );
+  }
+}
+
+class VerticalPageViewWigdet extends StatelessWidget {
+  const VerticalPageViewWigdet({
+    Key? key,
+    required this.onpageChange,
+    required this.totalPages,
+  }) : super(key: key);
+
+  final totalPages;
+  final int onpageChange;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            for (int i = 0; i < totalPages; i++)
+              Column(
+                children: [
+                  Container(
+                    height: 40,
+                    width: 3,
+                    decoration: BoxDecoration(
+                        color: onpageChange == i ? kColor : Colors.grey[800]),
+                  ),
+                  SizedBox(height: kPadding * 0.5),
+                ],
+              ),
           ],
         ),
       ],
@@ -321,35 +473,6 @@ class RightSideArrowwidget extends StatelessWidget {
   }
 }
 
-///RATTING FOOD WIDGET....
-class RattingfoodWidget extends StatefulWidget {
-  const RattingfoodWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<RattingfoodWidget> createState() => _RattingfoodWidgetState();
-}
-
-class _RattingfoodWidgetState extends State<RattingfoodWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Spacer(),
-        Text("😔"),
-        Spacer(),
-        Text("👎🏻"),
-        Spacer(),
-        Text("👍🏻"),
-        Spacer(),
-        Text("🎉"),
-        Spacer(),
-      ],
-    );
-  }
-}
-
 ///ABOUT FOOD PAGE ONE....
 class AboutFoodPageOne extends StatelessWidget {
   const AboutFoodPageOne({
@@ -359,17 +482,13 @@ class AboutFoodPageOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text(
-              strTell_Me,
-              style:
-                  Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 26),
-            ),
-          ],
+        Text(
+          strTell_Me,
+          style: Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 26),
         ),
-        SizedBox(height: kPadding * 3),
+        SizedBox(height: MediaQuery.of(context).size.height / 100 * 3),
         TextField(
           decoration: InputDecoration(
             border: InputBorder.none,
@@ -378,16 +497,11 @@ class AboutFoodPageOne extends StatelessWidget {
         Divider(
           color: kColor,
         ),
-        Row(
-          children: [
-            Text(
-              strMyFavouriteFood,
-              style:
-                  Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 26),
-            ),
-          ],
+        Text(
+          strMyFavouriteFood,
+          style: Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 26),
         ),
-        SizedBox(height: kPadding * 3),
+        SizedBox(height: MediaQuery.of(context).size.height / 100 * 3),
         TextField(
           decoration: InputDecoration(
             border: InputBorder.none,
@@ -396,16 +510,11 @@ class AboutFoodPageOne extends StatelessWidget {
         Divider(
           color: kColor,
         ),
-        Row(
-          children: [
-            Text(
-              strMyFavouriteDrink,
-              style:
-                  Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 26),
-            ),
-          ],
+        Text(
+          strMyFavouriteDrink,
+          style: Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 26),
         ),
-        SizedBox(height: kPadding * 3),
+        SizedBox(height: MediaQuery.of(context).size.height / 100 * 3),
         TextField(
           decoration: InputDecoration(
             border: InputBorder.none,
@@ -414,77 +523,26 @@ class AboutFoodPageOne extends StatelessWidget {
         Divider(
           color: kColor,
         ),
-        Row(
-          children: [
-            Text(
-              strMyFavouriteExercise,
-              style:
-                  Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 26),
-            ),
-          ],
+        Text(
+          strMyFavouriteExercise,
+          style: Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 26),
         ),
       ],
     );
   }
 }
 
-/// INDICATOR.....
-// class Indicator extends StatelessWidget {
-//   Indicator({
-//     required this.controller,
-//     this.itemCount: 0,
-//   });
-
-//   final PageController controller;
-
-//   final int itemCount;
-
-//   final Color normalColor = Colors.grey;
-
-//   final Color selectedColor = Colors.white;
-
-//   final double size = 9.0;
-
-//   final double spacing = kPadding * 0.5;
-
-//   Widget _buildIndicator(
-//       int index, int pageCount, double dotSize, double spacing) {
-//     bool isCurrentPageSelected = index ==
-//         (controller.page != null ? controller.page!.round() % pageCount : 0);
-
-//     return new Container(
-//       height: size,
-//       width: size + (2 * spacing),
-//       child: new Center(
-//         child: new Material(
-//           color: isCurrentPageSelected ? selectedColor : normalColor,
-//           type: MaterialType.circle,
-//           child: new Container(
-//               // width: dotSize,
-//               // height: dotSize,
-//               ),
-//         ),
-//       ),
-//     );
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return new Row(
-//       mainAxisAlignment: MainAxisAlignment.center,
-//       children: new List<Widget>.generate(
-//         itemCount,
-//         (int index) {
-//           return _buildIndicator(index, itemCount, size, spacing);
-//         },
-//       ),
-//     );
-//   }
-// }
-
 ///BEST INFLUENCERS....
 // ignore: must_be_immutable
-class BestInfluencers extends StatelessWidget {
+class BestInfluencers extends StatefulWidget {
+  // ignore: non_constant_identifier_names
+  @override
+  State<BestInfluencers> createState() => _BestInfluencersState();
+}
+
+class _BestInfluencersState extends State<BestInfluencers> {
+  bool influencerDetailPopUp = false;
+
   // ignore: non_constant_identifier_names
   var InfluencerDetail = [
     strUserProfile,
@@ -494,103 +552,197 @@ class BestInfluencers extends StatelessWidget {
     strUserProfile,
     strUserSecondprofile,
   ];
+
   // ignore: non_constant_identifier_names
   var InfluencerName = [
-    "chefchadwhite",
-    "chefboyarduff",
-    "spokaneeats",
-    "Thelinlander",
-    "Influencer5",
-    "Influencer6",
+    strInfluencerOne,
+    strInfluencerTwo,
+    strInfluencerThree,
+    strInfluencerFour,
+    strInfluencerFive,
+    strInfluencerSix,
   ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text(
-              "Best match from local\ninfluencers:",
-              style:
-                  Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 26),
-            ),
-          ],
+        Text(
+          strBestMatchFromLocal,
+          style: Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 26),
         ),
-        SizedBox(
-          height: kPadding * 4.8,
-        ),
+        SizedBox(height: MediaQuery.of(context).size.height / 100 * 6),
         Expanded(
-          child: Container(
-            child: GridView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: kPadding,
-                mainAxisSpacing: kPadding * 1,
-              ),
-              itemCount: InfluencerDetail.length,
-              itemBuilder: (BuildContext ctx, index) {
-                return Column(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        border: Border.all(color: kColor, width: 2),
-                        image: DecorationImage(
-                            image: AssetImage(
-                              InfluencerDetail[index],
+          child: Stack(
+            children: [
+              Container(
+                child: GridView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: kPadding * 1,
+                    mainAxisSpacing: kPadding * 1,
+                  ),
+                  itemCount: InfluencerDetail.length,
+                  itemBuilder: (BuildContext ctx, index) {
+                    return Column(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              influencerDetailPopUp = true;
+                            });
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              border: Border.all(color: kColor, width: 2),
                             ),
-                            fit: BoxFit.cover),
-                      ),
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        alignment: Alignment.center,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(50),
+                            child: Container(
+                              width:
+                                  MediaQuery.of(context).size.height / 100 * 9,
+                              height:
+                                  MediaQuery.of(context).size.height / 100 * 9,
+                              alignment: Alignment.center,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(50),
+                                ),
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                border: Border.all(
+                                    color: kbackgroundcolor, width: 3),
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                      InfluencerDetail[index],
+                                    ),
+                                    fit: BoxFit.cover),
+                              ),
+                            ),
                           ),
                         ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          border: Border.all(color: kbackgroundcolor, width: 3),
-                          image: DecorationImage(
-                              image: AssetImage(
-                                InfluencerDetail[index],
-                              ),
-                              fit: BoxFit.cover),
+                        SizedBox(height: kPadding),
+                        Text(
+                          InfluencerName[index],
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(fontSize: 17),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              influencerDetailPopUp
+                  ? Container(
+                      color: Color.fromRGBO(255, 255, 255, 0.97),
+                      height: double.infinity,
+                      width: double.infinity,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: kPadding * 2,
+                            right: kPadding * 2,
+                            top: kPadding * 3,
+                            bottom: kPadding * 3),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(60),
+                                  ),
+                                  child: Image.asset(strUserProfile),
+                                ),
+                                Spacer(),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      strInfluencerOne,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline5!
+                                          .copyWith(
+                                              color: kbackgroundcolor,
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 20,
+                                              letterSpacing: 0),
+                                    ),
+                                    SizedBox(height: kPadding),
+                                    Text(
+                                      "@chefchadwhite",
+                                      style:
+                                          Theme.of(context).textTheme.headline4,
+                                    ),
+                                    SizedBox(height: kPadding * 2),
+                                    Row(
+                                      children: [
+                                        SvgPicture.asset(
+                                          strInstagramLogo,
+                                          color: kbackgroundcolor,
+                                        ),
+                                        SizedBox(width: kPadding),
+                                        Text(
+                                          "41.1K",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline5!
+                                              .copyWith(
+                                                  letterSpacing: 0,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: kbackgroundcolor),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                Spacer(flex: 2),
+                              ],
+                            ),
+                            SizedBox(
+                              height: kPadding * 3,
+                            ),
+                            Text(
+                              "FAVORITES",
+                              style: Theme.of(context).textTheme.headline4,
+                            ),
+                            Spacer(),
+                            Row(
+                              children: [
+                                Spacer(),
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      influencerDetailPopUp = false;
+                                    });
+                                  },
+                                  child: SvgPicture.asset(
+                                      "assets/image/Back_Arrow_BlackColor.svg"),
+                                ),
+                                Spacer(),
+                                SvgPicture.asset(
+                                    "assets/image/Add_to_list.svg"),
+                                Spacer(),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                    SizedBox(height: kPadding),
-                    Text(InfluencerName[index],
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1!
-                            .copyWith(fontSize: 17)),
-                  ],
-                );
-              },
-            ),
+                    )
+                  : Container(),
+              influencerDetailPopUp ? Container() : RightSideArrowwidget(),
+            ],
           ),
         ),
-        RightSideArrowwidget(),
       ],
     );
   }
 }
-
-// _buildCircleIndicator(
-//     {required int itemConunt, required PageController controller}) {
-//   return CirclePageIndicator(
-//       size: 16.0,
-//       selectedSize: 18.0,
-//       itemCount: 5,
-//       currentPageNotifier: _currentPageNotifier.value = index
-//       // itemCount: allPages.length,
-//       // currentPageNotifier: _currentPageNotifier,
-//       );
-// }
 
 ////USE LOCATION.....
 
@@ -604,103 +756,84 @@ class UseLocation extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Use location",
+          strUseLocation,
           style: Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 26),
         ),
         Spacer(),
-        Center(
-          child: Container(
-            // height: 482,
-            decoration: BoxDecoration(
-              border: Border.all(color: kColor, width: 1),
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-            ),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: kPadding * 3, horizontal: kPadding * 3),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Allow “WILD” to access\nyour location while you\nare using the app?",
-                        style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                            fontSize: 20, fontWeight: FontWeight.w700),
-                      ),
-                      SizedBox(height: kPadding * 2),
-                      Text(
-                        "Your current location is used\nby WILD AI to find you\nnearby restaurants, bars and\nother places based on what\nyou doing.",
-                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                            fontSize: 18, fontWeight: FontWeight.w400),
-                      ),
-                    ],
-                  ),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: kColor, width: 1),
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: kPadding * 3, horizontal: kPadding * 2),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      strAllowAccessLocation,
+                      style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 0,color: kWhiteColor),
+                    ),
+                    SizedBox(height: kPadding * 2),
+                    Text(
+                      strYourCurrentLocation,
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0),
+                    ),
+                  ],
                 ),
-                Container(
-                  height: 240,
-                  child: ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: arrLocationPermission.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        child: Column(
-                          children: [
-                            Divider(
-                              color: kColor,
-                              height: kPadding * 5,
-                            ),
-                            Container(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  // Padding(
-                                  //   padding:
-                                  //       EdgeInsets.only(left: kPadding * 3),
-                                  //   child: Container(
-                                  //     child: selectedIndex == index
-                                  //         ? SvgPicture.asset(
-                                  //             strTrueIcon,
-                                  //             width: kPadding * 2,
-                                  //           )
-                                  //         : Container(
-                                  //             width: kPadding * 2,
-                                  //           ),
-                                  //   ),
-                                  // ),
-                                  // SizedBox(width: kPadding),
-                                  InkWell(
-                                    onTap: () {
-                                      // checkLocationPermission();
-                                    },
-                                    child: Container(
-                                      child: Text(
-                                        arrLocationPermission[index],
-                                        style: index == 2
-                                            ? Theme.of(context)
-                                                .textTheme
-                                                .headline5!
-                                                .copyWith(
-                                                  fontWeight: FontWeight.w800,
-                                                )
-                                            : Theme.of(context)
-                                                .textTheme
-                                                .headline5,
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+              ),
+              Container(
+                height: 170,
+                child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: arrLocationPermission.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        Divider(
+                          color: kColor,
+                          height: kPadding * 3,
+                        ),
+                        Container(
+                          child: InkWell(
+                            onTap: () {
+                              // checkLocationPermission();
+                            },
+                            child: Container(
+                              child: Text(
+                                arrLocationPermission[index],
+                                style: index == 2
+                                    ? Theme.of(context)
+                                        .textTheme
+                                        .headline5!
+                                        .copyWith(
+                                          letterSpacing: 0,
+                                          fontWeight: FontWeight.w800,
+                                        )
+                                    : Theme.of(context)
+                                        .textTheme
+                                        .headline5!
+                                        .copyWith(letterSpacing: 0),
+                                textAlign: TextAlign.center,
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                      );
-                    },
-                  ),
+                      ],
+                    );
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
         Spacer(),
@@ -713,7 +846,11 @@ class UseLocation extends StatelessWidget {
               ),
             );
           },
-          child: RightSideArrowwidget(),
+          child: Container(
+            height: 50,
+            width: 50,
+            child: RightSideArrowwidget(),
+          ),
         ),
       ],
     );

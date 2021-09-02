@@ -18,93 +18,88 @@ class DrinksDinnerState extends State<DrinksDinner> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Column(
-        children: [
-          LogoHeaderWithMenu(),
-          Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(left: kPadding * 3),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DrinksLoadScreen(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Container(
+                padding:
+                    EdgeInsets.only(left: kPadding * 3, right: kPadding * 3),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    LogoHeaderWithMenu(),
+                    Spacer(flex: 4),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DrinksLoadScreen(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        strDrinks,
+                        style: Theme.of(context).textTheme.headline3!.copyWith(
+                              fontSize: 38,
+                              fontWeight: FontWeight.w200,
+                            ),
                       ),
-                    );
-                  },
-                  child: Text(
-                    strDrinks,
-                    style: Theme.of(context).textTheme.headline3!.copyWith(
-                          fontSize: 38,
-                          fontWeight: FontWeight.w200,
+                    ),
+                    Divider(
+                      color: kColor,
+                      height: 35,
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Text(
+                        strDinner,
+                        style: Theme.of(context).textTheme.headline3!.copyWith(
+                              fontSize: 38,
+                              fontWeight: FontWeight.w200,
+                            ),
+                      ),
+                    ),
+                    Divider(
+                      color: kColor,
+                      height: 35,
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Text(
+                        strSurprise,
+                        style: Theme.of(context).textTheme.headline3!.copyWith(
+                              fontSize: 38,
+                              fontWeight: FontWeight.w200,
+                            ),
+                      ),
+                    ),
+                    Divider(
+                      color: kColor,
+                      height: 35,
+                    ),
+                    Spacer(),
+                    Row(
+                      children: [
+                        SvgPicture.asset(strSingleUser),
+                        SizedBox(
+                          width: kPadding * 1.5,
                         ),
-                  ),
+                        SvgPicture.asset(strDownArrow),
+                      ],
+                    ),
+                    Spacer(),
+                    Dropdownshearcalendarwidget(),
+                    SizedBox(height: MediaQuery.of(context).size.height / 30),
+                  ],
                 ),
-                Divider(
-                  color: kColor,
-                  endIndent: 30,
-                  height: 50,
-                  indent: 3,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Text(
-                    strDinner,
-                    style: Theme.of(context).textTheme.headline3!.copyWith(
-                          fontSize: 38,
-                          fontWeight: FontWeight.w200,
-                        ),
-                  ),
-                ),
-                Divider(
-                  color: kColor,
-                  endIndent: 30,
-                  height: 50,
-                  indent: 3,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Text(
-                    strSurprise,
-                    style: Theme.of(context).textTheme.headline3!.copyWith(
-                          fontSize: 38,
-                          fontWeight: FontWeight.w200,
-                        ),
-                  ),
-                ),
-                Divider(
-                  color: kColor,
-                  endIndent: 30,
-                  height: 50,
-                  indent: 3,
-                ),
-              ],
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-                left: kPadding * 4, bottom: kPadding * 4, top: kPadding * 6),
-            child: Row(
-              children: [
-                SvgPicture.asset(strSingleUser),
-                SizedBox(
-                  width: kPadding * 1.5,
-                ),
-                SvgPicture.asset(strDownArrow),
-              ],
-            ),
-          ),
-          Dropdown_shear_calendar_widget(),
-          SizedBox(
-            height: kPadding * 2,
-          ),
-          WildBottomAppBar(),
-        ],
-      )),
+            WildBottomAppBar(),
+          ],
+        ),
+      ),
     );
   }
 }

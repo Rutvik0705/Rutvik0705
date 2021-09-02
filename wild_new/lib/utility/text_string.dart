@@ -6,7 +6,7 @@ const String srtVerificationCode =
 const String srtSubmit = 'SUBMIT';
 const String srtVerificationNumber = 'VERIFICATION CODE';
 const String strConfirrmation = "Confirmation";
-const String strEnterTheCode = "Please enter he code ent to";
+const String strEnterTheCode = "Please enter the code sent to";
 const String strResendCode = 'RESEND CODE';
 const String strVerify = 'VERIFY';
 const String srtPapudu = "🎉";
@@ -62,3 +62,42 @@ const String strTell_Me = "Tell me...";
 const String strMyFavouriteFood = "is my favorite food.";
 const String strMyFavouriteDrink = "is my favorite drink.";
 const String strMyFavouriteExercise = "is my favorite exercise.";
+const String strAwesomefood = "Awesome Food";
+const String strGreatSelection = "Great Selection";
+const String strFriendlyStaff = "Friendly Staff";
+const String strGreatCocktails = "Great Cocktails";
+const String strLovedAmbience = "Loved the Ambience";
+const String strWhatDidLike = "What did you like?";
+const String strRecommendFriend = "Recommend to a friend?";
+const String strLeaveComment = "Leave a comment?";
+const String strForMoreAnalyticalFolks =
+    "For you more analytical\nfolks out there....";
+const String strOnScale = "On a scale of 1-10:";
+const String strDurkinsBarName = "Durkins\nLiquor Bar";
+const String strAllowAccessLocation =
+    "Allow “WILD” to access\nyour location while you\nare using the app?";
+const String strYourCurrentLocation =
+    "Your current location is used\nby WILD AI to find you\nnearby restaurants, bars and\nother places based on what\nyou doing.";
+const String strPickAllTheOnesYou =
+    "Pick all the ones you like…\nIs this making you\nhungry too?";
+const String strYouJustBurened = "(You just burned .5 calories training)";
+const String strHelpMeScott = "Help me help you, Scott.";
+const String strDoYouLikeFlatbread = "Do you like\nflatbread 🍕?";
+const String strWhatAboutCraft = "What about\ncraft 🍺?";
+const String strThisOneIsPersonal = "This one is personal...";
+const String strAreYouPerson = "Are you a 🍣\nperson?";
+const String strYouGreatNowWell =
+    "You did great!\nNow, we’ll focus on\na few more of your\npreferences.";
+const String strBestMatchFromLocal = "Best match from local\ninfluencers:";
+const String strUseLocation = "Use location";
+const String strInfluencerOne = "chefchadwhite";
+const String strInfluencerTwo = "chefboyarduff";
+const String strInfluencerThree = "spokaneeats";
+const String strInfluencerFour = "Thelinlander";
+const String strInfluencerFive = "Influencer5";
+const String strInfluencerSix = "Influencer6";
+const String strWhatDidYouThink = "What did you think?";
+const String strOurAiIsScouringYourLocation =
+    "Our AI is scouring\nyour location\nfor things\nyou like\n...";
+const String strCravingMediterranean =
+    "Craving Mediterranean? Get your search on.";

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:wild_new/Widgets/logoHeaderScreen_widget.dart';
-import 'package:wild_new/screens/review_bar_Screen.dart';
+import 'package:wild_new/screens/bar_review_Screen.dart';
+import 'package:wild_new/screens/tell_about_foodpage_view_screen.dart';
 import 'package:wild_new/utility/constant.dart';
-
-import 'tell_about_foodpage_view_screen.dart';
+import 'package:wild_new/utility/text_string.dart';
 
 class ReviewByNumberScreen extends StatefulWidget {
   @override
@@ -12,6 +12,19 @@ class ReviewByNumberScreen extends StatefulWidget {
 }
 
 class _ReviewByNumberScreenState extends State<ReviewByNumberScreen> {
+  int onpageChange = 0;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void _onpageChange(int index) {
+    setState(() {
+      onpageChange = index;
+    });
+  }
+
   var commentReview = [
     ReviewByMumberWidget(),
     CommentedReviewPage(),
@@ -24,21 +37,27 @@ class _ReviewByNumberScreenState extends State<ReviewByNumberScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kPadding * 3),
-          child: Column(
+          padding: EdgeInsets.symmetric(horizontal: kPadding * 2),
+          child: Stack(
             children: [
-              WildLogoMenueIconWhite(),
-              SizedBox(height: kPadding * 3),
-              Flexible(
-                child: PageView.builder(
-                  scrollDirection: Axis.vertical,
-                  controller: controller,
-                  itemCount: commentReview.length,
-                  itemBuilder: (context, index) {
-                    return commentReview[index];
-                  },
-                ),
+              Column(
+                children: [
+                  WildLogoMenueIconWhite(),
+                  SizedBox(height: kPadding * 3),
+                  Flexible(
+                    child: PageView.builder(
+                      onPageChanged: _onpageChange,
+                      scrollDirection: Axis.vertical,
+                      controller: controller,
+                      itemCount: commentReview.length,
+                      itemBuilder: (context, index) {
+                        return commentReview[index];
+                      },
+                    ),
+                  ),
+                ],
               ),
+              VerticalPageViewWigdet(onpageChange: onpageChange, totalPages: 2)
             ],
           ),
         ),
@@ -78,13 +97,13 @@ class _ReviewByMumberWidgetState extends State<ReviewByMumberWidget> {
       children: [
         BarRattingImageNameWidget(),
         Text(
-          "For you more analytical\nfolks out there....",
+          strForMoreAnalyticalFolks,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 23),
         ),
         SizedBox(height: kPadding * 8.3),
         Text(
-          "On a scale of 1-10:",
+          strOnScale,
           style: Theme.of(context)
               .textTheme
               .bodyText1!
@@ -93,47 +112,50 @@ class _ReviewByMumberWidgetState extends State<ReviewByMumberWidget> {
         SizedBox(
           height: kPadding * 4.7,
         ),
-        Container(
-          height: 150,
-          child: GridView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 5,
-              crossAxisSpacing: kPadding,
-              mainAxisSpacing: kPadding,
-            ),
-            itemCount: NumberRatting.length,
-            itemBuilder: (BuildContext ctx, index) {
-              return InkWell(
-                onTap: () {
-                  setState(() {
-                    cheakIndex = index;
-                  });
-                },
-                child: Container(
-                  height: 70,
-                  width: 52,
-                  decoration: BoxDecoration(
-                    color:
-                        cheakIndex == index ? kTextColor : Colors.transparent,
-                    border: Border.all(
-                        color:
-                            cheakIndex == index ? Colors.transparent : kColor,
-                        width: 1),
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Center(
-                    child: Text(
-                      NumberRatting[index],
-                      style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                            color:
-                                cheakIndex == index ? kbackgroundcolor : kColor,
-                          ),
+        Padding(
+          padding: EdgeInsets.only(right: kPadding * 2, left: kPadding * 2),
+          child: Container(
+            height: 150,
+            child: GridView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 5,
+                crossAxisSpacing: kPadding,
+                mainAxisSpacing: kPadding,
+              ),
+              itemCount: NumberRatting.length,
+              itemBuilder: (BuildContext ctx, index) {
+                return InkWell(
+                  onTap: () {
+                    setState(() {
+                      cheakIndex = index;
+                    });
+                  },
+                  child: Container(
+                    height: 70,
+                    width: 52,
+                    decoration: BoxDecoration(
+                      color:
+                          cheakIndex == index ? kTextColor : Colors.transparent,
+                      border: Border.all(
+                          color:
+                              cheakIndex == index ? Colors.transparent : kColor,
+                          width: 1),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Center(
+                      child: Text(
+                        NumberRatting[index],
+                        style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                            color: cheakIndex == index
+                                ? kbackgroundcolor
+                                : kWhiteColor),
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
       ],
@@ -147,31 +169,31 @@ class CommentedReviewPage extends StatefulWidget {
 }
 
 class CommentedReviewPageState extends State<CommentedReviewPage> {
-  var EmojiArray = ['😔', '👎🏻', '👍🏻', '🎉'];
+  var emojiArray = ['😔', '👎🏻', '👍🏻', '🎉'];
 
   int colorindex = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: kPadding * 2),
+        Spacer(),
         Text(
-          "What did you like?",
+          strWhatDidLike,
           style: Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 23),
         ),
-        SizedBox(height: kPadding * 3),
+        Spacer(),
         Row(
           children: [
             Container(
-              height: 49,
-              width: 163,
+              height: MediaQuery.of(context).size.height / 100 * 6,
+              width: MediaQuery.of(context).size.width / 100 * 42,
               child: Center(
                 child: Text(
-                  "Awesome Food",
+                  strAwesomefood,
                   style: Theme.of(context)
                       .textTheme
                       .overline!
-                      .copyWith(fontSize: 14),
+                      .copyWith(fontSize: 14, color: kWhiteColor),
                 ),
               ),
               decoration: BoxDecoration(
@@ -181,15 +203,15 @@ class CommentedReviewPageState extends State<CommentedReviewPage> {
             ),
             Spacer(),
             Container(
-              height: 49,
-              width: 163,
+              height: MediaQuery.of(context).size.height / 100 * 6,
+              width: MediaQuery.of(context).size.width / 100 * 42,
               child: Center(
                 child: Text(
-                  "Great Selection",
+                  strGreatSelection,
                   style: Theme.of(context)
                       .textTheme
                       .overline!
-                      .copyWith(fontSize: 14),
+                      .copyWith(fontSize: 14, color: kWhiteColor),
                 ),
               ),
               decoration: BoxDecoration(
@@ -205,15 +227,15 @@ class CommentedReviewPageState extends State<CommentedReviewPage> {
         Row(
           children: [
             Container(
-              height: 49,
-              width: 163,
+              height: MediaQuery.of(context).size.height / 100 * 6,
+              width: MediaQuery.of(context).size.width / 100 * 42,
               child: Center(
                 child: Text(
-                  "Friendly Staff",
+                  strFriendlyStaff,
                   style: Theme.of(context)
                       .textTheme
                       .overline!
-                      .copyWith(fontSize: 14),
+                      .copyWith(fontSize: 14, color: kWhiteColor),
                 ),
               ),
               decoration: BoxDecoration(
@@ -223,15 +245,15 @@ class CommentedReviewPageState extends State<CommentedReviewPage> {
             ),
             Spacer(),
             Container(
-              height: 49,
-              width: 163,
+              height: MediaQuery.of(context).size.height / 100 * 6,
+              width: MediaQuery.of(context).size.width / 100 * 42,
               child: Center(
                 child: Text(
-                  "Great Cocktails",
+                  strGreatCocktails,
                   style: Theme.of(context)
                       .textTheme
                       .overline!
-                      .copyWith(fontSize: 14),
+                      .copyWith(fontSize: 14, color: kWhiteColor),
                 ),
               ),
               decoration: BoxDecoration(
@@ -245,13 +267,15 @@ class CommentedReviewPageState extends State<CommentedReviewPage> {
           height: kPadding * 1.4,
         ),
         Container(
-          height: 52,
-          width: 220,
+          height: MediaQuery.of(context).size.height / 100 * 6,
+          width: MediaQuery.of(context).size.width / 100 * 50,
           child: Center(
             child: Text(
-              "Loved the Ambience",
-              style:
-                  Theme.of(context).textTheme.overline!.copyWith(fontSize: 14),
+              strLovedAmbience,
+              style: Theme.of(context)
+                  .textTheme
+                  .overline!
+                  .copyWith(fontSize: 14, color: kWhiteColor),
             ),
           ),
           decoration: BoxDecoration(
@@ -259,64 +283,69 @@ class CommentedReviewPageState extends State<CommentedReviewPage> {
             borderRadius: BorderRadius.circular(5),
           ),
         ),
-        SizedBox(height: kPadding * 5.2),
+        Spacer(flex: 2),
         Text(
-          "Recommend to a friend?",
+          strRecommendFriend,
           style: Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 23),
         ),
-        SizedBox(height: kPadding * 3),
-        Container(
-          height: kPadding * 9,
-          child: GridView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4, crossAxisSpacing: kPadding),
-            itemCount: EmojiArray.length,
-            itemBuilder: (BuildContext context, index) {
-              return InkWell(
-                onTap: () {
-                  setState(() {
-                    colorindex = index;
-                  });
-                },
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color:
-                        colorindex == index ? kTextColor : Colors.transparent,
-                    border: Border.all(
-                      color: colorindex == index ? Colors.transparent : kColor,
+        Spacer(),
+        Padding(
+          padding: EdgeInsets.only(right: kPadding * 2, left: kPadding * 2),
+          child: Container(
+            height: kPadding * 9,
+            child: GridView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4, crossAxisSpacing: kPadding * 2),
+              itemCount: emojiArray.length,
+              itemBuilder: (BuildContext context, index) {
+                return InkWell(
+                  onTap: () {
+                    setState(() {
+                      colorindex = index;
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color:
+                          colorindex == index ? kTextColor : Colors.transparent,
+                      border: Border.all(
+                        color:
+                            colorindex == index ? Colors.transparent : kColor,
+                      ),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Center(
-                    child: Text(
-                      EmojiArray[index],
+                    child: Center(
+                      child: Text(
+                        emojiArray[index],
+                        style: TextStyle(fontSize: 30),
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
-        SizedBox(height: kPadding * 5.6),
+        Spacer(flex: 2),
         TextField(
           keyboardType: TextInputType.multiline,
           minLines: 5,
           maxLines: 5,
           decoration: InputDecoration(
-            border: InputBorder.none,
-            fillColor: kdarkcolor,
-            filled: true,
-            hintText: "Leave a comment?",
-            hintStyle:
-                Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 16)
-          ),
+              border: InputBorder.none,
+              fillColor: kdarkcolor,
+              filled: true,
+              hintText: strLeaveComment,
+              hintStyle: Theme.of(context)
+                  .textTheme
+                  .subtitle2!
+                  .copyWith(fontSize: 16)),
         ),
-        Spacer(),
+        Spacer(flex: 2),
         InkWell(
           onTap: () {
-            print("Ritvik");
+            // print("Ritvik");
           },
           child:
               SvgPicture.asset("assets/image/Right_side_Full_fill_image.svg"),

@@ -7,8 +7,6 @@ import 'package:wild_new/screens/contacts_access_screen.dart';
 import 'package:wild_new/utility/image_string.dart';
 import 'package:wild_new/utility/text_string.dart';
 
-
-
 class LocationScreen extends StatefulWidget {
   @override
   LocationState createState() => LocationState();
@@ -29,60 +27,46 @@ class LocationState extends State<LocationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            LogoHeaderScreen(),
-            SizedBox(height: kPadding * 4.2),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: kPadding * 2.3),
-              child: Row(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: kPadding * 2.3),
+          child: Column(
+            children: [
+              LogoHeaderScreen(),
+              Spacer(),
+              Text(
+                strWeNeedSomeHelp,
+                style: Theme.of(context).textTheme.subtitle2,
+              ),
+              Spacer(),
+              Row(
                 children: [
+                  SvgPicture.asset(strLocationImage),
+                  Spacer(),
                   Text(
-                    strWeNeedSomeHelp,
-                    style: Theme.of(context).textTheme.subtitle2,
+                    strCanWeAccessLocation,
+                    style: Theme.of(context).textTheme.overline,
                   ),
+                  Spacer(),
+                  SvgPicture.asset(
+                    strQuestionMark,
+                  ),
+                  // Spacer(),
                 ],
               ),
-            ),
-            SizedBox(
-              height: kDefaultPadding * 2.7,
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: kPadding * 3),
-                  child: SvgPicture.asset(strLocationImage),
-                ),
-                Text(
-                  strCanWeAccessLocation,
-                  style: Theme.of(context).textTheme.overline,
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                SvgPicture.asset(
-                  strQuestionMark,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: kPadding * 4,
-            ),
-            Container(
-              height: 200,
-              child: ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: arrLocationPermission.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(left: kPadding * 3),
-                                child: Container(
+              Spacer(),
+              Container(
+                height: 170,
+                child: ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: arrLocationPermission.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      child: Column(
+                        children: [
+                          Container(
+                            child: Row(
+                              children: [
+                                Container(
                                   child: selectedIndex == index
                                       ? SvgPicture.asset(
                                           strTrueIcon,
@@ -92,17 +76,15 @@ class LocationState extends State<LocationScreen> {
                                           width: kPadding * 2,
                                         ),
                                 ),
-                              ),
-                              SizedBox(width: kPadding),
-                              InkWell(
-                                onTap: () {
-                                  checkLocationPermission();
-                                },
-                                child: Container(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: kPadding * 1.5,
-                                    ),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width / 15,
+                                ),
+                                // Spacer(),
+                                InkWell(
+                                  onTap: () {
+                                    checkLocationPermission();
+                                  },
+                                  child: Container(
                                     child: Text(
                                       arrLocationPermission[index],
                                       style: index == 2
@@ -114,98 +96,83 @@ class LocationState extends State<LocationScreen> {
                                               )
                                           : Theme.of(context)
                                               .textTheme
-                                              .headline5,
-                                      textAlign: TextAlign.center,
+                                              .headline5!
+                                              .copyWith(letterSpacing: 0),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(kPadding * 2.5),
-                          child: Container(
-                            color: Colors.white,
-                            height: 0.3,
-                            width: 300,
-                          ),
-                        )
-                      ],
-                    ),
-                  );
-                },
+                          Divider(
+                            thickness: 0.3,
+                            color: kColor,
+                            height: kPadding * 3.5,
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-            SizedBox(
-              height: kPadding * 4,
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: kPadding * 3),
-                  child: SvgPicture.asset(strBellIcon),
-                ),
-                Text(
-                  strCanWeSendNotification,
-                  style: Theme.of(context).textTheme.overline,
-                ),
-                SizedBox(
-                  width: 30,
-                ),
-                SvgPicture.asset(
-                  strQuestionMark,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: kPadding * 3,
-            ),
-            Row(
-              children: [
-                SizedBox(
-                  width: kPadding * 9,
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PermissionRequestScreen(),
-                      ),
-                    );
-                  },
-                  child: SvgPicture.asset(
-                    strCloseRound,
+              Spacer(),
+              Row(
+                children: [
+                  SvgPicture.asset(strBellIcon),
+                  Spacer(),
+                  Text(
+                    strCanWeSendNotification,
+                    style: Theme.of(context).textTheme.overline,
                   ),
-                ),
-                SizedBox(
-                  width: kPadding * 4.1,
-                ),
-                Container(
-                  height: 54,
-                  width: 0.5,
-                  color: kColor,
-                ),
-                SizedBox(
-                  width: kPadding * 4.1,
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PermissionRequestScreen(),
-                      ),
-                    );
-                  },
-                  child: SvgPicture.asset(
-                    strTrueRound,
+                  Spacer(flex: 2),
+                  SvgPicture.asset(
+                    strQuestionMark,
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+              Spacer(),
+              Row(
+                children: [
+                  Spacer(),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PermissionRequestScreen(),
+                        ),
+                      );
+                    },
+                    child: SvgPicture.asset(
+                      strCloseRound,
+                    ),
+                  ),
+                  Spacer(),
+                  Container(
+                    height: 54,
+                    width: 0.5,
+                    color: kColor,
+                  ),
+                  Spacer(),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PermissionRequestScreen(),
+                        ),
+                      );
+                    },
+                    child: SvgPicture.asset(
+                      strTrueRound,
+                    ),
+                  ),
+                  Spacer()
+                ],
+              ),
+              Spacer(flex: 3),
+            ],
+          ),
         ),
       ),
     );

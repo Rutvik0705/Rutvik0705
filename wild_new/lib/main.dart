@@ -13,11 +13,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'WILD',
       theme: ThemeData(
+        fontFamily: "Gotham",
         scaffoldBackgroundColor: kbackgroundcolor,
         textTheme: TextTheme(
           //headline 1
           headline1: TextStyle(
-            fontWeight: FontWeight.w200,
+            fontWeight: FontWeight.w300,
             fontSize: 55.0,
             color: kColor,
           ),
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
           headline5: TextStyle(
             color: kTextColor,
             fontSize: 18,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w700,
             letterSpacing: 1,
           ),
           //headline 6
@@ -78,7 +79,7 @@ class MyApp extends StatelessWidget {
             fontSize: 28,
             fontWeight: FontWeight.w400,
           ),
-          //Overline 
+          //Overline
           overline: TextStyle(
             color: kColor,
             fontSize: 22,
@@ -86,9 +87,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: WildLoginWidget(
-        Padding: kDefaultPadding,
-      ),
+      home: WildLoginWidget(),
     );
   }
 }

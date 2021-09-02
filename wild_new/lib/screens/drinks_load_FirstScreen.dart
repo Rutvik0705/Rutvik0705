@@ -1,18 +1,18 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:wild_new/screens/cheers_Screen.dart';
+import 'package:wild_new/screens/wildLoad_screen.dart';
 import 'package:wild_new/utility/constant.dart';
 import 'package:wild_new/utility/image_string.dart';
 import 'package:wild_new/utility/text_string.dart';
 import '../Widgets/bottom_AppBar_Widget.dart';
 
-class DrinksLoadScreen extends StatefulWidget {
+class DrinksLoadFirstScreen extends StatefulWidget {
   @override
-  DrinksLoadScreenState createState() => DrinksLoadScreenState();
+  DrinksLoadFirstScreenState createState() => DrinksLoadFirstScreenState();
 }
 
-class DrinksLoadScreenState extends State<DrinksLoadScreen> {
+class DrinksLoadFirstScreenState extends State<DrinksLoadFirstScreen> {
   @override
   void initState() {
     super.initState();
@@ -28,7 +28,7 @@ class DrinksLoadScreenState extends State<DrinksLoadScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => CheersScreen(),
+        builder: (context) => LoadScreen(),
       ),
     );
   }
@@ -53,25 +53,38 @@ class DrinksLoadScreenState extends State<DrinksLoadScreen> {
                 SvgPicture.asset(strWildLogoIcon),
                 Spacer(),
                 Padding(
-                  padding: EdgeInsets.only(left: kPadding * 3),
+                  padding: EdgeInsets.only(left: kPadding * 3, right: kPadding),
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black87,
-                            offset: Offset(
-                              -10,
-                              1.0,
-                            ),
-                            blurRadius: 100.0,
-                            spreadRadius: 40.0,
+                      // gradient: RadialGradient(
+                      //   colors: [
+                      //     Color.fromRGBO(0, 0, 0, 1),
+                      //     Color.fromRGBO(0, 0, 0, 0.5),
+                      //   ],
+                      // ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black87,
+                          offset: Offset(
+                            -10,
+                            1.0,
+                          ),
+                          blurRadius: 100.0,
+                          spreadRadius: 40.0,
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(300),
+                    ),
+                    child: Text(
+                      strOurAiIsScouringYourLocation,
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                        shadows: [
+                          Shadow(
+                            color: Color.fromRGBO(0, 0, 0, 0.25),
+                            offset: Offset(2, 2),
                           ),
                         ],
-                        borderRadius: BorderRadius.circular(300)),
-                    child: Text(
-                      strAiHappeningNow,
-                      style: Theme.of(context).textTheme.bodyText2,
+                      ),
                     ),
                   ),
                 ),

@@ -7,89 +7,67 @@ import 'package:wild_new/Widgets/logoHeaderScreen_widget.dart';
 import 'package:wild_new/utility/image_string.dart';
 import 'package:wild_new/utility/text_string.dart';
 
-
 class WildLoginWidget extends StatelessWidget {
-  const WildLoginWidget({
-    Key? key,
-    // ignore: non_constant_identifier_names
-    required double Padding,
-  })  : _Padding = Padding,
-        super(key: key);
-
-  // ignore: non_constant_identifier_names
-  final double _Padding;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
-            ),
-            LogoHeaderScreen(),
-            Spacer(),
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: kPadding * 2),
-                ),
-                Text(
-                  strWhatILikeDoing,
-                  style: Theme.of(context).textTheme.headline1,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: kDefaultPadding,
-                      vertical: kDefaultPadding * 2.5),
-                ),
-                Text(strLetsGetStarted,
-                    style: Theme.of(context).textTheme.headline2)
-              ],
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SendCodeScreen(),
-                      ),
-                    );
-                  },
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding:
+                      EdgeInsets.only(left: kPadding * 3, right: kPadding * 3),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SvgPicture.asset(
-                        strLogin,
-                        color: kColor,
+                      LogoHeaderScreen(),
+                      Spacer(
+                        flex: 2,
+                      ),
+                      Text(
+                        strWhatILikeDoing,
+                        style: Theme.of(context).textTheme.headline1,
+                      ),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height / 100 * 4),
+                      Text(strLetsGetStarted,
+                          style: Theme.of(context).textTheme.headline2),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height / 100 * 4),
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SendCodeScreen(),
+                                ),
+                              );
+                            },
+                            child: SvgPicture.asset(
+                              strLogin,
+                              color: kColor,
+                            ),
+                          ),
+                          Spacer(),
+                          SvgPicture.asset(
+                            strSignup,
+                            color: kColor,
+                          ),
+                          Spacer(flex: 2),
+                        ],
+                      ),
+                      Spacer(
+                        flex: 2,
                       ),
                     ],
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.all(_Padding * 1.9),
-                ),
-                Column(
-                  children: [
-                    SvgPicture.asset(
-                      strSignup,
-                      color: kColor,
-                    )
-                  ],
-                ),
-              ],
+              ),
             ),
-            Spacer(),
             WildBottomAppBar()
           ],
         ),
